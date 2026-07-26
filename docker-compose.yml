@@ -1,0 +1,39 @@
+# 담론레이더 로컬 개발 환경 = 운영(VPS) 환경
+# 사용법: docker compose up -d
+#   - PostgreSQL 16 + pgvector (첫 기동 시 schema/*.sql 자동 실행)
+#   - Metabase: http://localhost:3000 (내부 대시보드 v0 — PRD §10)
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: damron
+      POSTGRES_USER: damron
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-damron-dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./schema:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U damron"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  metabase:
+    image: metabase/metabase:latest
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: damron
+      MB_DB_PASS: ${POSTGRES_PASSWORD:-damron-dev}
+      MB_DB_HOST: db
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

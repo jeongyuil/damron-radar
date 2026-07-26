@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+# 전사 전문·오디오는 자산이 아님 — 저장소에 절대 커밋 금지 (§7.3)
+transcripts/
+audio/
+*.mp3
+*.m4a
+*.wav

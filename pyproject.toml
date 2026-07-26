@@ -1,0 +1,26 @@
+[project]
+name = "damron-radar"
+version = "0.1.0"
+description = "담론레이더 — 정치 유튜브 담론 데이터 파이프라인 (Phase 1)"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.116",
+    "httpx>=0.27",
+    "psycopg[binary]>=3.2",
+    "pydantic>=2.9",
+    "python-dotenv>=1.0",
+    "google-api-python-client>=2.150",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8",
+    "pytest>=8.3",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
