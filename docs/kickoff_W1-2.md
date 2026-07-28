@@ -19,7 +19,9 @@ PRD v1.1 §14 기준. DoD: **채널 30개 확정·등록, 신규 영상이 DB에
 - [ ] 채널 30개 확정 — 두 사람 합의 (D5, ~8/9)
 - [x] 이슈 시드 택소노미 — `reference/issues_seed_v0.csv` (31건) ✅ 완료
 - [x] 엔티티 사전 시드 — `reference/entities_seed_v0.csv` (211건) ✅ 완료 (목표 200건 초과)
-- [ ] 법률 자문 예약 — 요청서 준비됨 (`reference/legal_consult_brief.html`), W3~4 실시 목표
+- [ ] 법률 자문 예약 — 요청서 준비됨, W3~4 실시 목표
+  - **Q1에 '경로 C' 추가**: Gemini API의 유튜브 URL 공식 처리(Google 소유 플랫폼 경유) —
+    비공식 자막(A)·오디오 STT(B)와 약관 리스크 비교 자문 (근거: docs/step3_chunking_spec.md 부록 A)
   - 지참 자료 챙기기: PRD(§5·§7.3·§8) ✅ · 샘플 주간 리포트(가상 데이터) ⬜ 제작 필요 · 데이터 흐름도/DB 스키마 요약 1매 ⬜ 제작 필요
 
 ## 엔지니어 (성환)
