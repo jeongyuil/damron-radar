@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>담론레이더 주간 담론 리포트 — 파일럿 v0 (2026-07-24 ~ 07-29)</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;      /* chart surface */
+    --page: #f9f9f7;
+    --ink-1: #0b0b0b;
+    --ink-2: #52514e;
+    --ink-muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    /* diverging pair: blue(지지) ↔ red(반대), neutral gray midpoint */
+    --pos: #2a78d6;
+    --neg: #e34948;
+    --mid: #f0efec;
+    /* categorical: fact / claim / opinion (slots 1·2·3, 검증 통과) */
+    --t-fact: #2a78d6;
+    --t-claim: #eb6834;
+    --t-opinion: #1baf7a;
+    --warn-bg: #fdf3e0;
+    --warn-border: #eda100;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    background: var(--page); color: var(--ink-1);
+    line-height: 1.55; font-size: 15px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ── 배포 제한 배너 ── */
+  .restricted {
+    background: var(--warn-bg); border: 1px solid var(--warn-border);
+    border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--ink-2);
+    margin-bottom: 24px; display: flex; gap: 8px; align-items: baseline;
+  }
+  .restricted b { color: var(--ink-1); }
+
+  /* ── 헤더 ── */
+  header h1 { font-size: 24px; letter-spacing: -0.01em; }
+  header .sub { color: var(--ink-2); margin-top: 4px; font-size: 14px; }
+  .brand { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--ink-muted); text-transform: uppercase; margin-bottom: 6px; }
+  .notice { font-size: 12.5px; color: var(--ink-muted); margin-top: 10px; }
+
+  /* ── 섹션 ── */
+  section { margin-top: 40px; }
+  h2 { font-size: 17px; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .h2-note { font-size: 13px; color: var(--ink-muted); margin-bottom: 14px; }
+
+  /* ── 지표 카드 ── */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 18px; }
+  .tile {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .tile .v { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+  .tile .v small { font-size: 14px; font-weight: 500; color: var(--ink-2); }
+  .tile .k { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+
+  /* ── 카드 공통 ── */
+  .card {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; margin-top: 14px;
+  }
+  .issue-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .issue-head h3 { font-size: 15.5px; }
+  .issue-head .n { font-size: 12.5px; color: var(--ink-muted); }
+
+  /* ── 발언량 바 (이슈별 · 단일 계열 → 범례 없음) ── */
+  .volrow { display: grid; grid-template-columns: 150px 1fr 44px; gap: 10px; align-items: center; margin-top: 9px; }
+  .volrow .lbl { font-size: 13.5px; text-align: right; color: var(--ink-2); }
+  .volrow .track { height: 14px; position: relative; }
+  .volrow .bar { position: absolute; left: 0; top: 0; bottom: 0; background: #2a78d6; border-radius: 0 4px 4px 0; }
+  .volrow .val { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+  /* ── 다이버징 바 (관점 분포) ── */
+  .dv-scale { display: grid; grid-template-columns: 190px 1fr 52px; gap: 10px; align-items: center; font-size: 11.5px; color: var(--ink-muted); margin-top: 14px; }
+  .dv-scale .ticks { display: flex; justify-content: space-between; padding: 0 2px; }
+  .dvrow { display: grid; grid-template-columns: 190px 1fr 52px; gap: 10px; align-items: center; margin-top: 8px; }
+  .dvrow .lbl { text-align: right; font-size: 13px; line-height: 1.3; }
+  .dvrow .lbl .ax { color: var(--ink-muted); font-size: 11.5px; }
+  .dvtrack { position: relative; height: 16px; background: var(--mid); border-radius: 4px; }
+  .dvtrack::before { /* 중립 0선 */
+    content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 2px;
+    background: var(--baseline); transform: translateX(-1px); border-radius: 1px;
+  }
+  .dvbar { position: absolute; top: 2px; bottom: 2px; }
+  .dvbar.pos { left: 50%; background: var(--pos); border-radius: 0 4px 4px 0; }
+  .dvbar.neg { right: 50%; background: var(--neg); border-radius: 4px 0 0 4px; }
+  .dvbar.thin { opacity: 0.45; }
+  .dvrow .val { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+  .flag { display: inline-block; font-size: 10.5px; color: var(--ink-muted); border: 1px solid var(--grid); border-radius: 4px; padding: 0 5px; margin-left: 6px; vertical-align: 1px; }
+  .dv-legend { display: flex; gap: 18px; font-size: 12px; color: var(--ink-2); margin-top: 14px; }
+  .dv-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .dv-legend .lg-pos::before { background: var(--pos); }
+  .dv-legend .lg-neg::before { background: var(--neg); }
+  .dv-legend .lg-low::before { background: var(--neg); opacity: 0.45; }
+
+  .insight {
+    margin-top: 14px; padding: 10px 14px; border-left: 3px solid var(--baseline);
+    font-size: 13.5px; color: var(--ink-2); background: var(--page); border-radius: 0 8px 8px 0;
+  }
+  .insight b { color: var(--ink-1); }
+
+  /* ── 진영 칩 (색이 아닌 텍스트로 식별 — 정파 색 오독 방지) ── */
+  .chip { display: inline-block; font-size: 11px; border: 1px solid var(--grid); color: var(--ink-2); border-radius: 999px; padding: 1px 8px; }
+
+  /* ── 주요 발언 ── */
+  .utt { border-top: 1px solid var(--grid); padding: 12px 0; }
+  .utt:first-of-type { border-top: none; padding-top: 4px; }
+  .utt .meta { font-size: 12.5px; color: var(--ink-muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .utt .meta b { color: var(--ink-1); font-size: 13px; }
+  .utt blockquote {
+    font-size: 14px; margin: 6px 0 4px; color: var(--ink-1);
+    padding-left: 12px; border-left: 2px solid var(--grid);
+  }
+  .utt .sum { font-size: 13px; color: var(--ink-2); }
+  .utt a { color: #256abf; text-decoration: none; font-size: 12.5px; }
+  .utt a:hover { text-decoration: underline; }
+  .tchip { display: inline-block; font-size: 10.5px; font-weight: 600; border-radius: 4px; padding: 1px 6px; color: #fff; }
+  .tchip.fact { background: var(--t-fact); }
+  .tchip.claim { background: var(--t-claim); }
+  .tchip.opinion { background: var(--t-opinion); }
+  .stanceval { font-variant-numeric: tabular-nums; }
+
+  /* ── 팩트체크 큐 ── */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
+  th { text-align: left; font-size: 12px; color: var(--ink-muted); font-weight: 600; padding: 6px 8px; border-bottom: 1px solid var(--baseline); }
+  td { padding: 9px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+  td .q { color: var(--ink-2); font-size: 12.5px; margin-top: 3px; }
+  td ul { margin: 4px 0 0 16px; color: var(--ink-2); font-size: 12.5px; }
+  .tablewrap { overflow-x: auto; }
+
+  /* ── 유형 스택 바 ── */
+  .st-legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--ink-2); margin: 10px 0 4px; }
+  .st-legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .st-legend .lg-fact::before { background: var(--t-fact); }
+  .st-legend .lg-claim::before { background: var(--t-claim); }
+  .st-legend .lg-op::before { background: var(--t-opinion); }
+  .strow { display: grid; grid-template-columns: 190px 1fr 40px; gap: 10px; align-items: center; margin-top: 9px; }
+  .strow .lbl { text-align: right; font-size: 13px; }
+  .strow .lbl .ax { color: var(--ink-muted); font-size: 11.5px; }
+  .stack { display: flex; height: 18px; gap: 2px; /* 2px surface gap */ }
+  .seg { position: relative; }
+  .seg:first-child { border-radius: 4px 0 0 4px; }
+  .seg:last-child { border-radius: 0 4px 4px 0; }
+  .seg.fact { background: var(--t-fact); }
+  .seg.claim { background: var(--t-claim); }
+  .seg.opinion { background: var(--t-opinion); }
+  .seg .pl { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 600; color: #fff; }
+  .strow .tot { font-size: 12.5px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+
+  /* ── 방법론/고지 ── */
+  .method { font-size: 13.5px; color: var(--ink-2); }
+  .method h4 { font-size: 13.5px; color: var(--ink-1); margin: 14px 0 4px; }
+  .method ul { margin-left: 18px; }
+  .method li { margin-top: 3px; }
+
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--grid); font-size: 12px; color: var(--ink-muted); }
+
+  @media print {
+    body { background: #fff; font-size: 12.5px; }
+    .wrap { max-width: none; padding: 0; }
+    .card, section { break-inside: avoid; }
+    .restricted { break-inside: avoid; }
+    a { color: inherit; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="restricted">⚠️ <span><b>배포 제한:</b> 내부 검토 및 법률 자문용 초안입니다. 법률 자문(Q1~Q5) 완료 전 외부 배포 금지. 본 리포트는 여론조사가 아니며, 표본은 통계적 대표성이 없습니다.</span></div>
+
+  <header>
+    <div class="brand">담론레이더 · DAMRON RADAR</div>
+    <h1>주간 정치 담론 리포트 — 파일럿 v0</h1>
+    <div class="sub">분석 기간: 2026-07-24 ~ 07-29 (영상 업로드 기준) · 발행 2026-07-31 · 작성: 담론레이더 분석팀</div>
+    <div class="notice">본 리포트의 모든 수치는 <b>발언(utterance) 단위</b> 집계입니다. 모든 인용은 140자 이내이며 원 영상 타임스탬프 링크로 검증 가능합니다.</div>
+  </header>
+
+  <!-- ── 표본 개요 ── -->
+  <section>
+    <h2>표본 개요</h2>
+    <div class="h2-note">파일럿 표본: 선정 31개 채널 중 6개 채널(진보 2 · 보수 2 · 중립 2), 영상 7편. 정식 운영 시 주간 전수 수집으로 확대됩니다.</div>
+    <div class="tiles">
+      <div class="tile"><div class="v">7<small>편</small></div><div class="k">분석 영상</div></div>
+      <div class="tile"><div class="v">144<small>건</small></div><div class="k">추출 발언</div></div>
+      <div class="tile"><div class="v">6<small>개</small></div><div class="k">채널 (진보2·보수2·중립2)</div></div>
+      <div class="tile"><div class="v">72,662<small>자</small></div><div class="k">처리 전사 분량</div></div>
+      <div class="tile"><div class="v">12,140<small>자</small></div><div class="k">인용 총량 (원문의 16.7%)</div></div>
+    </div>
+  </section>
+
+  <!-- ── 이슈별 발언량 ── -->
+  <section>
+    <h2>① 이번 주 주요 이슈 — 발언량</h2>
+    <div class="h2-note">파일럿에서는 전주 대비 급등률 산출이 불가능해(주간 비교 데이터 없음) 이슈별 발언량으로 축약 제시합니다. 주요 4개 이슈 68건 외 76건은 기타 이슈(입법성과·방송·외교 등)로 분류.</div>
+    <div class="card">
+      <div class="volrow"><div class="lbl">민주당 전당대회</div><div class="track"><div class="bar" style="width:100%"></div></div><div class="val">24건</div></div>
+      <div class="volrow"><div class="lbl">부동산 (보유세·공급)</div><div class="track"><div class="bar" style="width:91.7%"></div></div><div class="val">22건</div></div>
+      <div class="volrow"><div class="lbl">사법·선거법</div><div class="track"><div class="bar" style="width:54.2%"></div></div><div class="val">13건</div></div>
+      <div class="volrow"><div class="lbl">정성호·보완수사권</div><div class="track"><div class="bar" style="width:37.5%"></div></div><div class="val">9건</div></div>
+    </div>
+  </section>
+
+  <!-- ── 관점 분포 ── -->
+  <section>
+    <h2>② 이슈별 관점 분포</h2>
+    <div class="h2-note">채널별 발언 stance 가중 평균 (−2 강한 반대 ~ +2 강한 지지, 발언 confidence 가중). stance의 기준 쟁점은 이슈별 각주 참조. 발언 3건 미만은 <b>표본부족</b>으로 표시하며 해석에 사용하지 않습니다.</div>
+
+    <div class="card">
+      <div class="issue-head"><h3>민주당 전당대회 — 기준 쟁점: 김민석 측 '신천지 개입' 공세</h3><span class="n">n=24</span></div>
+      <div class="dv-scale"><div></div><div class="ticks"><span>−2 반대</span><span>0</span><span>+2 지지</span></div><div></div></div>
+      <div class="dvrow"><div class="lbl">최병묵의 FACT <span class="ax">보수 · n=8</span></div><div class="dvtrack"><div class="dvbar neg" style="width:40.8%"></div></div><div class="val">−1.63</div></div>
+      <div class="dvrow"><div class="lbl">박시영TV <span class="ax">진보 · n=12</span></div><div class="dvtrack"><div class="dvbar neg" style="width:29.0%"></div></div><div class="val">−1.16</div></div>
+      <div class="dvrow"><div class="lbl">박성태의 뉴스쇼 <span class="ax">중립 · n=4</span></div><div class="dvtrack"><div class="dvbar neg" style="width:7.5%"></div></div><div class="val">−0.30</div></div>
+      <div class="insight"><b>관찰:</b> 진영이 다른 두 채널이 같은 방향(−)을 보인 주간. 보수(최병묵)는 "근거 없는 네거티브 기획"으로, 진보(박시영)는 "당에 해로운 자해 공세"로 — <b>서로 다른 논리로 같은 공세를 비판</b>했습니다. 좌우 대립 구도로는 포착되지 않는 담론 구조입니다.</div>
+    </div>
+
+    <div class="card">
+      <div class="issue-head"><h3>정성호·보완수사권 — 기준 쟁점: 보완수사권 폐지(검찰개혁 입법)</h3><span class="n">n=9</span></div>
+      <div class="dv-scale"><div></div><div class="ticks"><span>−2 반대</span><span>0</span><span>+2 지지</span></div><div></div></div>
+      <div class="dvrow"><div class="lbl">박성태의 뉴스쇼 <span class="ax">중립 · n=3</span></div><div class="dvtrack"><div class="dvbar pos" style="width:42.3%"></div></div><div class="val">+1.69</div></div>
+      <div class="dvrow"><div class="lbl">채널A 뉴스TOP10 <span class="ax">중립 · n=5</span></div><div class="dvtrack"><div class="dvbar neg" style="width:30.3%"></div></div><div class="val">−1.21</div></div>
+      <div class="dvrow"><div class="lbl">박시영TV <span class="ax">진보 · n=1</span><span class="flag">표본부족 n&lt;3</span></div><div class="dvtrack"><div class="dvbar neg thin" style="width:25.0%"></div></div><div class="val">−1.00</div></div>
+      <div class="insight"><b>관찰:</b> '중립' 축 두 채널이 정반대 방향. 박성태의 뉴스쇼 수치는 <b>출연자(정청래 후보) 발언</b>이 지배해 +1.69 — 채널 성향이 아니라 그 주간 게스트 구성의 반영입니다. 정식 리포트에서는 진행자/출연자 발언을 분리 집계해 이 왜곡을 통제합니다 (한계 §방법론 참조).</div>
+    </div>
+
+    <div class="card">
+      <div class="issue-head"><h3>사법·선거법 — 기준 쟁점: 이재명 재판·선거법 개정 옹호 여부</h3><span class="n">n=13</span></div>
+      <div class="dv-scale"><div></div><div class="ticks"><span>−2 반대</span><span>0</span><span>+2 지지</span></div><div></div></div>
+      <div class="dvrow"><div class="lbl">성창경TV <span class="ax">보수 · n=11</span></div><div class="dvtrack"><div class="dvbar neg" style="width:34.3%"></div></div><div class="val">−1.37</div></div>
+      <div class="dvrow"><div class="lbl">채널A 뉴스TOP10 <span class="ax">중립 · n=2</span><span class="flag">표본부족 n&lt;3</span></div><div class="dvtrack"><div class="dvbar neg thin" style="width:15.0%"></div></div><div class="val">−0.60</div></div>
+      <div class="insight"><b>관찰:</b> 이번 표본에는 이 이슈의 진보 측 발언이 없어 <b>단면만 포착</b>된 상태입니다(성창경TV 단독 주도). 전수 수집 시 반대 관점 발언이 함께 잡혀야 분포로 성립합니다 — 파일럿 표본 한계의 전형 사례로 기재합니다.</div>
+    </div>
+
+    <div class="card">
+      <div class="issue-head"><h3>부동산 — 기준 쟁점: 보유세 강화·분양가 상한제</h3><span class="n">n=22</span></div>
+      <div class="dv-scale"><div></div><div class="ticks"><span>−2 반대</span><span>0</span><span>+2 지지</span></div><div></div></div>
+      <div class="dvrow"><div class="lbl">매불쇼 <span class="ax">진보 · n=22</span></div><div class="dvtrack"><div class="dvbar pos" style="width:15.0%"></div></div><div class="val">+0.60</div></div>
+      <div class="insight"><b>관찰:</b> 단일 채널·단일 영상(전문가 토론 46분) 표본. 출연 전문가 2인(이광수·한문도)은 강한 찬성(+2 다수)이나 진행자·패널의 회의적 발언이 섞여 가중 평균은 +0.60에 그침 — <b>평균값이 내부 이견을 가리는</b> 사례로, 정식 리포트에선 발언 분포(히스토그램)를 병기합니다.</div>
+      <div class="dv-legend"><span class="lg-pos">지지(+)</span><span class="lg-neg">반대(−)</span><span class="lg-low">표본부족(참고용)</span></div>
+    </div>
+  </section>
+
+  <!-- ── 주요 발언 ── -->
+  <section>
+    <h2>③ 주요 발언</h2>
+    <div class="h2-note">이슈별 stance 강도·확신도 상위 발언. 인용은 자동 자막 원문 그대로이며(STT 오류 포함 가능) 140자 이내, 링크는 해당 발언 시점으로 이동합니다.</div>
+
+    <div class="card">
+      <div class="issue-head"><h3>민주당 전당대회</h3></div>
+      <div class="utt">
+        <div class="meta"><b>정청래</b> <span class="chip">박성태의 뉴스쇼 · 중립</span> <span class="tchip claim">주장</span> <span class="stanceval">stance −2</span></div>
+        <blockquote>"신천지가 조직적으로 개입되 있다는 의혹에 대해서 경고하면 내가 신천지냐? 아무 근거가 없는데 계속 경고만 하면 그게 당해게 이롭습니까? 해롭습니까?"</blockquote>
+        <div class="sum">경쟁후보의 근거 없는 '신천지 개입' 경고는 당에 해로우며 자신을 신천지로 몰아가는 것이라 반발. <a href="https://youtube.com/watch?v=Riz2ABmKH5s&t=1407s">▶ 23:27</a></div>
+      </div>
+      <div class="utt">
+        <div class="meta"><b>최병묵</b> <span class="chip">최병묵의 FACT · 보수</span> <span class="tchip opinion">의견</span> <span class="stanceval">stance −2</span></div>
+        <blockquote>"그런 거 갖고 있으면 내놓으면 되지. 왜 전당대회 미룹니까? … 결국 근거가 없다. 또는 있더라도 정청래 후보와 신천지와의 유착을 증명해 줄 만한 녹취가 아니다."</blockquote>
+        <div class="sum">녹취 미공개를 근거로 신천지 공세를 '정청래 흠집내기용 네거티브'로 규정. <a href="https://youtube.com/watch?v=5xsPJzSr2wY&t=537s">▶ 8:57</a></div>
+      </div>
+      <div class="utt">
+        <div class="meta"><b>정청래</b> <span class="chip">박성태의 뉴스쇼 · 중립</span> <span class="tchip claim">주장</span> <span class="stanceval">stance +2</span></div>
+        <blockquote>"명대전은 이재명 대통령과 제가 싸웁니까? 저에게 아무런 이익이 없는 짓을 왜 하죠? 이거는 언론의 갈라측이라고 생각하고 언론의 프레임이라고 생각합니다."</blockquote>
+        <div class="sum">'명대전(이재명-정청래 갈등)' 구도를 언론 프레임으로 반박. <a href="https://youtube.com/watch?v=Riz2ABmKH5s&t=374s">▶ 6:14</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="issue-head"><h3>정성호·보완수사권</h3></div>
+      <div class="utt">
+        <div class="meta"><b>정청래</b> <span class="chip">박성태의 뉴스쇼 · 중립</span> <span class="tchip claim">주장</span> <span class="stanceval">stance +2</span></div>
+        <blockquote>"이번 보완수사권 전면 폐지는 대선 때 대국민 약속이고요. 수사와 기소의 분리, 이것이 대원칙입니다. 그 흐름상 가는 거고요."</blockquote>
+        <div class="sum">보완수사권 폐지를 대선 공약·수사기소 분리 원칙의 이행으로 규정. <a href="https://youtube.com/watch?v=Riz2ABmKH5s&t=926s">▶ 15:26</a></div>
+      </div>
+      <div class="utt">
+        <div class="meta"><b>이현종</b> <span class="chip">채널A 뉴스TOP10 · 중립</span> <span class="tchip opinion">의견</span> <span class="stanceval">stance −2</span></div>
+        <blockquote>"그냥 도구마에 빠져 있어요. 이거는 무조건 없어야 된다는 도구마."</blockquote>
+        <div class="sum">민주당의 검찰 폐지 기조를 탈원전·4대강에 빗대 '도그마'로 비판. <a href="https://youtube.com/watch?v=4Y1r3WZDEpE&t=704s">▶ 11:44</a></div>
+      </div>
+      <div class="utt">
+        <div class="meta"><b>정영진</b> <span class="chip">채널A 뉴스TOP10 · 중립</span> <span class="tchip opinion">의견</span> <span class="stanceval">stance −1</span></div>
+        <blockquote>"정성호 개인의 건강이 무너지는게 아니라요. 대한민국 사법 시스템의 건강이 무너지는 거다."</blockquote>
+        <div class="sum">정성호 장관의 이탈 시사 발언을 사법 시스템 붕괴 신호로 해석. <a href="https://youtube.com/watch?v=4Y1r3WZDEpE&t=396s">▶ 6:36</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="issue-head"><h3>사법·선거법</h3></div>
+      <div class="utt">
+        <div class="meta"><b>성창경</b> <span class="chip">성창경TV · 보수</span> <span class="tchip opinion">의견</span> <span class="stanceval">stance −2</span></div>
+        <blockquote>"이재명은 빨리 재판을 제여야 됩니다. 사법부가 이런 식으로 눈치 보고 권력에 눈치 보고 있는 사람들이라면"</blockquote>
+        <div class="sum">사법부의 '권력 눈치보기'를 비판하며 이재명 재판 재개를 촉구. <a href="https://youtube.com/watch?v=u0onEq3NkGw&t=573s">▶ 9:33</a></div>
+      </div>
+      <div class="utt">
+        <div class="meta"><b>정점식</b> <span class="chip">채널A 뉴스TOP10 · 중립 (전언)</span> <span class="tchip claim">주장</span> <span class="stanceval">stance −2</span></div>
+        <blockquote>"이재명 대통령은 보안수사건 폐지에 심중한 입장이었습니다. 그런데 갑자기 입장을 바꿔서 민주당 강경파의 뜻에 따라 보안수 사건 폐지에 동의했습니다."</blockquote>
+        <div class="sum">앵커가 전한 국민의힘 원내대표 주장 — 입장 급변의 배경 의혹 제기. <a href="https://youtube.com/watch?v=4Y1r3WZDEpE&t=816s">▶ 13:36</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="issue-head"><h3>부동산</h3></div>
+      <div class="utt">
+        <div class="meta"><b>이광수</b> <span class="chip">매불쇼 · 진보</span> <span class="tchip opinion">의견</span> <span class="stanceval">stance +2</span></div>
+        <blockquote>"조세 부담의 형평성이 굉장히 중요해요. 10년 동안 연봉이 20배 증가했다고 하면 세금 증가합니까? 근데 왜 집값 오르는 거는 세금을 안 내요?"</blockquote>
+        <div class="sum">근로소득 과세와의 형평성 논리로 보유세 강화를 주장. <a href="https://youtube.com/watch?v=giPfbaMbWDM&t=840s">▶ 14:00</a></div>
+      </div>
+      <div class="utt">
+        <div class="meta"><b>한문도</b> <span class="chip">매불쇼 · 진보</span> <span class="tchip claim">주장</span> <span class="stanceval">stance +2</span></div>
+        <blockquote>"서리풀 정비구역이 지금 22,000호 예정이에요... 진짜 분양가 상한제를 한다고 하면... 한 12억이면 되네 분양이. 이거 반값으로 갑시다라는 게 제 주장이죠."</blockquote>
+        <div class="sum">서리풀 정비구역에 분양가 상한제 적용 시 30평 약 12억(반값) 가능하다는 자체 추산 제시 — 검증 가능 수치 포함(팩트체크 큐 등재). <a href="https://youtube.com/watch?v=giPfbaMbWDM&t=1196s">▶ 19:56</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 팩트체크 큐 ── -->
+  <section>
+    <h2>④ 팩트체크 단서 큐</h2>
+    <div class="h2-note">type=주장(claim) 중 검증 가능 포인트가 명시된 발언 상위 10건. 담론레이더는 사실 여부를 판정하지 않으며, 검증 대상 단서와 출처 링크만 제공합니다.</div>
+    <div class="card tablewrap">
+      <table>
+        <thead><tr><th style="width:24%">발언자 / 채널</th><th>주장 (인용)과 검증 포인트</th><th style="width:10%">출처</th></tr></thead>
+        <tbody>
+          <tr><td><b>정청래</b><div class="q">박성태의 뉴스쇼 · 중립</div></td><td>"내란 청산이죠. 내란특검 김건희 특검 종합특검도. 재판소원제, 법 왜곡제, 대법관 증원…방송통신법도 개정했고 상법도 3차 개정을 했습니다."<ul><li>각 특검법 통과 여부</li><li>재판소원제 도입·대법관 증원 경과</li><li>방송통신법·상법 3차 개정 내용</li></ul></td><td><a href="https://youtube.com/watch?v=Riz2ABmKH5s&t=717s">▶ 11:57</a></td></tr>
+          <tr><td><b>성창경</b><div class="q">성창경TV · 보수</div></td><td>"김문기를 몰랐다. 아이 말한 혐의도 어 거의 사실로 지목되면서 자이 기소가 됐습니다."<ul><li>2021-12 방송 발언 내용</li><li>김문기 해외출장·골프 동행 사실</li><li>허위사실 혐의 기소 경위</li></ul></td><td><a href="https://youtube.com/watch?v=u0onEq3NkGw&t=189s">▶ 3:09</a></td></tr>
+          <tr><td><b>정청래</b><div class="q">박성태의 뉴스쇼 · 중립</div></td><td>"경찰이 수사관이 훨씬 더 많습니다. 한 4, 5만 명 된다 그래요. 검사는 뭐 한 2,500명 정도 되고요."<ul><li>경찰 수사인력 4~5만 명 정확성</li><li>검사 정원 2,500명 정확성</li></ul></td><td><a href="https://youtube.com/watch?v=Riz2ABmKH5s&t=1041s">▶ 17:21</a></td></tr>
+          <tr><td><b>이광수</b><div class="q">매불쇼 · 진보</div></td><td>"한국이 0.3~0.4가 맞고 미국이 1% 언저리가 맞습니다."<ul><li>한국 보유세 실효세율 0.3~0.4%</li><li>미국 보유세 실효세율 약 1%</li></ul></td><td><a href="https://youtube.com/watch?v=giPfbaMbWDM&t=254s">▶ 4:14</a></td></tr>
+          <tr><td><b>한문도</b><div class="q">매불쇼 · 진보</div></td><td>"서리풀 정비구역이 지금 22,000호 예정이에요... 한 12억이면 되네 분양이."<ul><li>서리풀 정비구역 약 22,000호 규모</li><li>상한제 적용 시 30평 12억 추산 근거</li></ul></td><td><a href="https://youtube.com/watch?v=giPfbaMbWDM&t=1196s">▶ 19:56</a></td></tr>
+          <tr><td><b>박선원 (전언)</b><div class="q">최병묵의 FACT · 보수</div></td><td>"신천지가 파란당, 빨간당으로 표시하며 중복 가입을 독려했다. 필라테스 프로젝트 진행 시 구역 부서별로 입당 목표를 정하고…"<ul><li>'필라테스 프로젝트' 조직 입당 지시 실재 여부</li><li>구역별 입당 목표·투표 지시 문서 존재 여부</li></ul></td><td><a href="https://youtube.com/watch?v=5xsPJzSr2wY&t=367s">▶ 6:07</a></td></tr>
+          <tr><td><b>김민석 (전언)</b><div class="q">최병묵의 FACT · 보수</div></td><td>"비자발입당 자율정리 30일을 선포하고 자율정리자는 면책하자."<ul><li>자율정리 30일 제안의 실제 시행 여부</li><li>면책 대상 범위</li></ul></td><td><a href="https://youtube.com/watch?v=5xsPJzSr2wY&t=173s">▶ 2:53</a></td></tr>
+          <tr><td><b>정청래</b><div class="q">박성태의 뉴스쇼 · 중립</div></td><td>"당 지지율이 45에서 50 사이가 많았습니다."<ul><li>해당 기간 정당 지지율 45~50% 수치·출처</li><li>과거 지지율과의 비교</li></ul></td><td><a href="https://youtube.com/watch?v=Riz2ABmKH5s&t=763s">▶ 12:43</a></td></tr>
+          <tr><td><b>성창경</b><div class="q">성창경TV · 보수</div></td><td>"성남시 백현동 부지 용도 변경과 관련해서는 국토부의 협박이 있었다 이렇게 말했습니다."<ul><li>2021-10 국감 발언 내용</li><li>국토부 부인·성남시 위임 공문 주장</li></ul></td><td><a href="https://youtube.com/watch?v=u0onEq3NkGw&t=146s">▶ 2:26</a></td></tr>
+          <tr><td><b>이광수</b><div class="q">매불쇼 · 진보</div></td><td>"과세를 하게 되면 수익률이 떨어지죠. 그럼 수요가 감소할 수밖에 없어요."<ul><li>압구정 현대 최근 시세 50~60억 상승 사례</li><li>현행 실효세율 0.3~0.4% 수치</li></ul></td><td><a href="https://youtube.com/watch?v=giPfbaMbWDM&t=1987s">▶ 33:07</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── 유형 분포 ── -->
+  <section>
+    <h2>⑤ 채널별 발언 유형 구성</h2>
+    <div class="h2-note">사실(fact) = 검증 가능한 사실 진술 · 주장(claim) = 검증이 필요한 주장 · 의견(opinion) = 가치 판단. 채널의 '팩트 대비 의견' 비중은 담론 스타일 지표입니다.</div>
+    <div class="card">
+      <div class="st-legend"><span class="lg-fact">사실</span><span class="lg-claim">주장</span><span class="lg-op">의견</span></div>
+      <div class="strow"><div class="lbl">성창경TV <span class="ax">보수</span></div><div class="stack"><div class="seg fact" style="width:31.3%"><span class="pl">31%</span></div><div class="seg claim" style="width:43.7%"><span class="pl">44%</span></div><div class="seg opinion" style="width:25.0%"><span class="pl">25%</span></div></div><div class="tot">n=16</div></div>
+      <div class="strow"><div class="lbl">최병묵의 FACT <span class="ax">보수</span></div><div class="stack"><div class="seg fact" style="width:25.0%"><span class="pl">25%</span></div><div class="seg claim" style="width:34.4%"><span class="pl">34%</span></div><div class="seg opinion" style="width:40.6%"><span class="pl">41%</span></div></div><div class="tot">n=32</div></div>
+      <div class="strow"><div class="lbl">박시영TV <span class="ax">진보</span></div><div class="stack"><div class="seg fact" style="width:23.1%"><span class="pl">23%</span></div><div class="seg claim" style="width:50.0%"><span class="pl">50%</span></div><div class="seg opinion" style="width:26.9%"><span class="pl">27%</span></div></div><div class="tot">n=26</div></div>
+      <div class="strow"><div class="lbl">박성태의 뉴스쇼 <span class="ax">중립</span></div><div class="stack"><div class="seg fact" style="width:20.8%"><span class="pl">21%</span></div><div class="seg claim" style="width:50.0%"><span class="pl">50%</span></div><div class="seg opinion" style="width:29.2%"><span class="pl">29%</span></div></div><div class="tot">n=24</div></div>
+      <div class="strow"><div class="lbl">채널A 뉴스TOP10 <span class="ax">중립</span></div><div class="stack"><div class="seg fact" style="width:21.1%"><span class="pl">21%</span></div><div class="seg claim" style="width:42.1%"><span class="pl">42%</span></div><div class="seg opinion" style="width:36.8%"><span class="pl">37%</span></div></div><div class="tot">n=19</div></div>
+      <div class="strow"><div class="lbl">매불쇼 <span class="ax">진보</span></div><div class="stack"><div class="seg fact" style="width:7.4%"></div><div class="seg claim" style="width:40.7%"><span class="pl">41%</span></div><div class="seg opinion" style="width:51.9%"><span class="pl">52% · 사실 7%</span></div></div><div class="tot">n=27</div></div>
+      <div class="insight"><b>관찰:</b> 시사평론형 채널(성창경TV)은 사실 진술 비중이 가장 높고(31%), 예능형 토크(매불쇼)는 의견 비중이 절반을 넘습니다(52%). 포맷이 담론 유형 구성을 좌우 — 채널 성향과는 독립적인 축입니다.</div>
+    </div>
+  </section>
+
+  <!-- ── 방법론 ── -->
+  <section>
+    <h2>방법론·표본·한계 고지</h2>
+    <div class="card method">
+      <h4>데이터 처리</h4>
+      <ul>
+        <li>수집: 유튜브 자동 생성 자막(한국어) — 영상 7편, 전사 72,662자.</li>
+        <li>구조화: LLM 기반 발언 단위 추출(발언 정의: 하나의 주장·평가·사실 진술이 완결되는 최소 단위). 발언별 요지 재서술 + 140자 이내 원문 인용 + 유형·감정·stance·검증포인트·타임스탬프.</li>
+        <li>검증: 전 발언 인용 길이(≤140자)·stance 범위(−2~+2) 기계 검증 통과. 추출 확신도(confidence) 낮은 발언은 stance 가중치에 반영.</li>
+      </ul>
+      <h4>한계 (파일럿 v0)</h4>
+      <ul>
+        <li><b>표본 대표성 없음:</b> 31개 선정 채널 중 6개, 영상 7편의 편의 표본. 수치는 파이프라인 실증용이며 여론·담론 지형의 대표치가 아닙니다.</li>
+        <li><b>자동 자막 STT 오류:</b> 인용문에 음성 인식 오류가 포함될 수 있습니다(예: "보안수사건"→"보완수사권"). 인용은 자막 원문 그대로 표기, 판단은 요지 기준.</li>
+        <li><b>화자 분리 부재:</b> 다인 토크 영상(매불쇼)은 문맥 단서로 화자를 추정했으며 해당 발언은 확신도를 낮춰 처리.</li>
+        <li><b>진행자/출연자 미분리:</b> 채널 stance에 게스트 발언이 합산됨(박성태의 뉴스쇼 사례). 정식 버전에서 역할 분리 집계 예정.</li>
+        <li><b>stance 기준 쟁점의 이슈별 정의:</b> 현재 수동 각주로 명시. 프롬프트 검증(W5)에서 이슈별 stance 앵커를 표준화합니다.</li>
+      </ul>
+      <h4>고지</h4>
+      <ul>
+        <li>본 리포트는 <b>여론조사가 아니며</b>, 어떤 수치도 국민·유권자 여론으로 해석될 수 없습니다. 측정 대상은 유튜브 채널 발화자의 공개 발언입니다.</li>
+        <li>원본 영상·음성·전사 전문은 리포트에 포함하지 않습니다. 인용 총량 12,140자(발언당 평균 84자, 원 전사의 16.7%), 전량 출처 타임스탬프 링크 병기.</li>
+        <li>팩트체크 큐는 검증 '단서'이며 사실 판정이 아닙니다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    담론레이더(가칭) 파일럿 리포트 v0 · 2026-07-31 · 문의: 담론레이더 분석팀 — 본 문서는 법률 자문 및 내부 검토용으로 작성되었으며 인용·발췌를 포함한 외부 공유를 금합니다.
+  </footer>
+
+</div>
+</body>
+</html>
