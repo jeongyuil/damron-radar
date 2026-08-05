@@ -11,3 +11,4 @@ audio/
 *.mp3
 *.m4a
 *.wav
+eval_data/
