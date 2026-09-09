@@ -7,7 +7,7 @@ PRD는 type/sentiment/stance를 **LLM이 분류**하는 구조(§6.2·§6.3)다.
 |---|---|---|
 | `stt_corrections_v0.csv` | ① 추출 후 엔티티 매칭(raw_name → canonical, §6.3 "미매칭은 raw_name 보존") ② 프롬프트 `[엔티티 사전]`의 STT 변형 힌트(고신뢰만) | **전사 텍스트는 수정하지 않는다**(step3 스펙 3a-0 "발화 무수정"). quote_excerpt는 오탈자 그대로, summary·targets에서 정규화 |
 | `noise_patterns_v0.csv` | 3a-0 전처리(구간 제거) · 요약/임베딩 정규화 · 추출 제외 규칙 | `scope=preprocess_3a0`만 코드로 제거. `summary_embedding`은 quote에 적용 금지. 제거 구간은 로그 |
-| `entities_additions_v0.csv` | `entities_seed_v1.csv` 병합 후보 | 확인여부=N은 검토 후 병합 |
+| `entities_additions_v0.csv` | (병합 완료 → `data/seeds/entities_seed_v1.csv`, 228건) | 이력용 |
 | `type_decision_book_v0.md` | 검수 기준(§9) · 프롬프트 v2 판례 주입(상호 승인) | §6.2 각주 "판례집 자체가 자산" |
 | `type_signal_lexicon_v0.csv` | 검수 큐 우선순위(사전 신호와 LLM 판정 불일치 건) | LLM 분류 대체 아님 |
 | `stance_polarity_v0.csv` | 프롬프트 `[영상 컨텍스트]` 이슈별 부호 정의 · 검수 기준 | **§8 지표 해석 → 상호 승인** |
