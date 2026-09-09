@@ -11,7 +11,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 2,
@@ -21,7 +22,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 3,
@@ -31,7 +33,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 4,
@@ -41,7 +44,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 5,
@@ -51,7 +55,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 6,
@@ -61,7 +66,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "election-fraud-allegation",
-   "note": "주장과 의견이 섞여있음 | stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "주장과 의견이 섞여있음 | stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 7,
@@ -71,7 +77,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 8,
@@ -81,7 +88,8 @@
    "sentiment": "negative",
    "stance_score": 0,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "",
+   "stance_target": "야당의 특검·포렌식 요구"
   },
   {
    "idx": 9,
@@ -91,7 +99,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 10,
@@ -101,7 +110,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   },
   {
    "idx": 11,
@@ -111,7 +121,8 @@
    "sentiment": "positive",
    "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "",
+   "stance_target": "윤석열 비상계엄(부정선거 규명 목적)"
   },
   {
    "idx": 12,
@@ -121,7 +132,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "election-fraud-allegation",
-   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)"
+   "note": "stance=대상(윤상현 발언) 기준 −. §6.3 stance.target 방식 (2026-09-09 유일 결정)",
+   "stance_target": "윤상현 발언(부정선거론 경계·재검표 무산)"
   }
  ]
 }

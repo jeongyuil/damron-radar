@@ -1,12 +1,221 @@
 {
- "generated": "2026-09-09T20:52:15+09:00",
+ "generated": "2026-09-09T21:00:22+09:00",
  "golden": "transcripts/golden/golden_MD-vsT5q_5U.jsonl",
- "prompt_sha": "0cbf055bc2a0",
+ "prompt_sha": "5c417cda62b1",
  "models": {
+  "qwen3.5-9b-8bit@v2+dict": {
+   "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
+   "provider": "openai",
+   "note": "현 임시 모델 · thinking off · 프롬프트 v2 · 사전 주입",
+   "score": {
+    "n": 12,
+    "errors": 0,
+    "type_acc": 0.16666666666666666,
+    "type_f1_3": 0.12121212121212122,
+    "type_f1_2": 0.12121212121212122,
+    "type_classes_2": [
+     "fact",
+     "claim",
+     "opinion"
+    ],
+    "sent_acc": 0.9166666666666666,
+    "sent_f1": 0.31884057971014496,
+    "stance_mae": 0.75,
+    "stance_n_both": 12,
+    "stance_null_match": 1.0,
+    "stance_dir_match": 0.8333333333333334,
+    "stance_exact": 0.5833333333333334,
+    "latency_avg": 8.083333333333334,
+    "latency_total": 97.0,
+    "tokens_out_avg": 97.83333333333333
+   },
+   "preds": [
+    {
+     "idx": 1,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "중심 명제는 윤상현 의원이 '국민의 힘이 부정 선거론의 나락에 빠져들었다'고 주장했다는 전언 전달이며, 이는 검증 가능한 명제이나 화자가 근거 (출처/수치/확인) 를 제시하지 않아 claim 으로 분류됨"
+     },
+     "error": null,
+     "latency_s": 9.3,
+     "usage": {
+      "in": 1941,
+      "out": 84
+     }
+    },
+    {
+     "idx": 2,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "윤상현이 부정선거를 함부로 단정해서는 안 된다고 말한 사실을 근거로 윤상현의 태도를 비판하는 것이 중심 명제이며, 근거가 없는 전언 형식으로 검증 가능한 명제를 주장함"
+     },
+     "error": null,
+     "latency_s": 6.1,
+     "usage": {
+      "in": 1828,
+      "out": 73
+     }
+    },
+    {
+     "idx": 3,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "중심 명제는 '국민의힘이 부정선거 의혹에 빠졌고 분노를 정치적으로 이용하는 것은 안 된다'는 화자의 평가이며, 이는 참/거짓으로 확인 불가능한 당위 및 해석에 해당한다."
+     },
+     "error": null,
+     "latency_s": 6.3,
+     "usage": {
+      "in": 1878,
+      "out": 75
+     }
+    },
+    {
+     "idx": 4,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "중심 명제인 '윤상현이 부정선거론에 나락에 빠져들었다'는 참/거짓 확인이 불가능한 화자의 평가적 해석이며, 부정선거 의혹에 대한 강력한 반대와 비판의 태도를 보여줍니다."
+     },
+     "error": null,
+     "latency_s": 6.7,
+     "usage": {
+      "in": 1950,
+      "out": 79
+     }
+    },
+    {
+     "idx": 5,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "화자는 윤상현 의원이 '확인되지 않는 부정 선거론'을 제기하며 부정선거 의혹을 부정하는 행위를 비판하고 있으며, 이는 검증 가능한 명제이나 근거 (출처/수치/확인) 가 없는 전언과 단정적 평가로 구성됨"
+     },
+     "error": null,
+     "latency_s": 6.9,
+     "usage": {
+      "in": 1853,
+      "out": 84
+     }
+    },
+    {
+     "idx": 6,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "화자는 윤상현의 발언을 '기가 막히는' 것으로 평가하며, 아직 조사가 시작되지 않은 상태에서 특정 결론을 단정 짓는 행위를 강하게 비판하고 있다."
+     },
+     "error": null,
+     "latency_s": 5.6,
+     "usage": {
+      "in": 1871,
+      "out": 66
+     }
+    },
+    {
+     "idx": 7,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "윤상현 의원의 부정선거 의혹을 정치적 자산 보호를 위한 객관적 검정 외면으로 해석하고 공개 재검표 반대 태도를 배신으로 규정"
+     },
+     "error": null,
+     "latency_s": 5.4,
+     "usage": {
+      "in": 1895,
+      "out": 62
+     }
+    },
+    {
+     "idx": 8,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "중심 명제는 '특검과 포렌식 요구는 부정선거 음모론을 이용하는 정치 카르텔의 행위'라는 화자의 해석이며, 이는 참/거짓을 검증할 수 없는 평가와 당위적 주장이므로 opinion 유형이고, 부정선거 의혹을 제기하는 주체를 강력하게 비판하는 태도이므로 stance_score는 -2입니다."
+     },
+     "error": null,
+     "latency_s": 8.5,
+     "usage": {
+      "in": 1807,
+      "out": 105
+     }
+    },
+    {
+     "idx": 9,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "화자는 윤상현의 발언을 근거로 그가 성과를 못 내자 당의 귀책으로 몰아세운다고 해석하며, 이는 참/거짓 판별이 불가능한 평가적 주장입니다."
+     },
+     "error": null,
+     "latency_s": 5.9,
+     "usage": {
+      "in": 1840,
+      "out": 70
+     }
+    },
+    {
+     "idx": 10,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "국조 특위 위원장의 리더십과 태도 문제를 '바가지로 들어먹는' 것으로 규정하며 부정선거 규명 실패의 원인을 윤상현에게 귀속하는 강한 비판적 평가"
+     },
+     "error": null,
+     "latency_s": 5.8,
+     "usage": {
+      "in": 1816,
+      "out": 71
+     }
+    },
+    {
+     "idx": 11,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "윤성열 대통령이 비상계엄을 선포한 동기를 '부정선거 의혹 규명'이라고 단정하며, 이는 검증 가능한 명제이나 근거(출처·수치·확인)가 없는 전언으로 claim이며, 부정선거 의혹을 강력하게 주장하는 것으로서 이슈에 대한 찬성 (+) 이나 반대 (-) 가 아닌, 의혹 자체를 제기하는 것이므로 stance_score 는 null 이나, 화자가 윤성열 대통령의 행위를 '비상계엄'으로 묘사하고 그 목적을 부정선거 규명으로 해석하는 것이므로 화자의 태도는 부정선거 의혹을 지지하는 (+) 것으로 볼 수 있으나, 문제의 핵심은 화자가 윤성열 대통"
+     },
+     "error": null,
+     "latency_s": 25.1,
+     "usage": {
+      "in": 1824,
+      "out": 338
+     }
+    },
+    {
+     "idx": 12,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "윤상현의 발언이 부정선거 규명 요구를 찬물로 식힌 것으로 평가하는 '당을 배신하고 기회주의적인 태도'라는 화자의 가치 판단이 중심 명제"
+     },
+     "error": null,
+     "latency_s": 5.4,
+     "usage": {
+      "in": 1789,
+      "out": 67
+     }
+    }
+   ]
+  },
   "qwen3.5-9b-8bit+dict": {
    "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
    "provider": "openai",
-   "note": "현 임시 모델 · thinking off · 사전 주입",
+   "note": "현 임시 모델 · thinking off · 사전 주입 (이전 실행)",
    "score": {
     "n": 12,
     "errors": 0,

@@ -11,7 +11,8 @@
    "sentiment": "negative",
    "stance_score": 0,
    "issue": "real-estate-policy",
-   "note": "X 출처 인용했고 부정적인 감정"
+   "note": "X 출처 인용했고 부정적인 감정",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 2,
@@ -21,7 +22,8 @@
    "sentiment": "negative",
    "stance_score": 0,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 3,
@@ -31,7 +33,8 @@
    "sentiment": "negative",
    "stance_score": 0,
    "issue": "real-estate-policy",
-   "note": "claim→opinion (R6 예측(금리↑→집값 폭락)) 2026-09-09 유일 합의"
+   "note": "claim→opinion (R6 예측(금리↑→집값 폭락)) 2026-09-09 유일 합의",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 4,
@@ -41,7 +44,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 5,
@@ -51,7 +55,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": "앞부분은 팩트, 이게 정책입니까? 라는 질문은 의미가 있다기 보다는 부정적인 감정 표현 | claim→opinion (R6 예측+평가('이게 정책입니까')) 2026-09-09 유일 합의"
+   "note": "앞부분은 팩트, 이게 정책입니까? 라는 질문은 의미가 있다기 보다는 부정적인 감정 표현 | claim→opinion (R6 예측+평가('이게 정책입니까')) 2026-09-09 유일 합의",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 6,
@@ -61,7 +66,8 @@
    "sentiment": "negative",
    "stance_score": 1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 7,
@@ -71,7 +77,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": "claim→opinion (R6 예측(주가·부동산 폭락)) 2026-09-09 유일 합의"
+   "note": "claim→opinion (R6 예측(주가·부동산 폭락)) 2026-09-09 유일 합의",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 8,
@@ -81,7 +88,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 9,
@@ -91,7 +99,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 10,
@@ -101,7 +110,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 11,
@@ -111,7 +121,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 12,
@@ -121,7 +132,8 @@
    "sentiment": "negative",
    "stance_score": 0,
    "issue": "real-estate-policy",
-   "note": "claim→opinion (R6 예측('폭락 안 할 것')) 2026-09-09 유일 합의"
+   "note": "claim→opinion (R6 예측('폭락 안 할 것')) 2026-09-09 유일 합의",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 13,
@@ -131,7 +143,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 14,
@@ -141,7 +154,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 15,
@@ -151,7 +165,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": "이재명의 수치는 있으나, 전부 투기꾼으로 매도 한다는 등 의견도 섞여 있음"
+   "note": "이재명의 수치는 있으나, 전부 투기꾼으로 매도 한다는 등 의견도 섞여 있음",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 16,
@@ -161,7 +176,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 17,
@@ -171,7 +187,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "김용범 정책실장 유임·레버리지 정책"
   },
   {
    "idx": 18,
@@ -181,7 +198,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 19,
@@ -191,7 +209,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 20,
@@ -201,7 +220,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": "사실과 의견이 섞임"
+   "note": "사실과 의견이 섞임",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 21,
@@ -211,7 +231,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 22,
@@ -221,7 +242,8 @@
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "real-estate-policy",
-   "note": "claim→opinion (R7 당위('완만히 상승해야')) 2026-09-09 유일 합의"
+   "note": "claim→opinion (R7 당위('완만히 상승해야')) 2026-09-09 유일 합의",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   },
   {
    "idx": 23,
@@ -231,7 +253,8 @@
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "",
+   "stance_target": "이재명 부동산 정책·X 글(금리·공급·세제)"
   }
  ]
 }

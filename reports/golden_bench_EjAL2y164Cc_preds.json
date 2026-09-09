@@ -1,12 +1,386 @@
 {
- "generated": "2026-09-09T20:44:34+09:00",
+ "generated": "2026-09-09T21:02:32+09:00",
  "golden": "transcripts/golden/golden_EjAL2y164Cc.jsonl",
- "prompt_sha": "6d1389394f76",
+ "prompt_sha": "f94b466e20c6",
  "models": {
+  "qwen3.5-9b-8bit@v2+dict": {
+   "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
+   "provider": "openai",
+   "note": "현 임시 모델 · thinking off · 프롬프트 v2 · 사전 주입",
+   "score": {
+    "n": 23,
+    "errors": 0,
+    "type_acc": 0.7391304347826086,
+    "type_f1_3": 0.5476190476190476,
+    "type_f1_2": 0.5476190476190476,
+    "type_classes_2": [
+     "fact",
+     "claim",
+     "opinion"
+    ],
+    "sent_acc": 0.9130434782608695,
+    "sent_f1": 0.3181818181818182,
+    "stance_mae": 0.8571428571428571,
+    "stance_n_both": 21,
+    "stance_null_match": 0.9130434782608695,
+    "stance_dir_match": 0.8571428571428571,
+    "stance_exact": 0.23809523809523808,
+    "latency_avg": 5.621739130434783,
+    "latency_total": 129.3,
+    "tokens_out_avg": 67.73913043478261
+   },
+   "preds": [
+    {
+     "idx": 1,
+     "pred": {
+      "type": "fact",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "이재명이 X에 모건스탠리 기사의 링크를 올렸고, 해당 기사 내용은 올해 GDP 성장률 3.4% 및 내년 1분기 말 기준금리 3.5% 상승 전망임을 화자가 출처와 구체적 수치를 제시하며 전달함"
+     },
+     "error": null,
+     "latency_s": 8.8,
+     "usage": {
+      "in": 1813,
+      "out": 84
+     }
+    },
+    {
+     "idx": 2,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "이재명의 링크와 금리 상승 전망을 근거로 '부동산 투기 관심 있는 분들은 유의해야 한다'는 투자 조언을 제시한 것으로, 참/거짓 판별이 불가능한 예측 및 해석에 해당"
+     },
+     "error": null,
+     "latency_s": 5.9,
+     "usage": {
+      "in": 1902,
+      "out": 72
+     }
+    },
+    {
+     "idx": 3,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "금리 상승이 주택값 폭락으로 이어질 것이라는 예측과 이를 근거로 투기꾼을 경계하라는 이재명의 주장을 전달함"
+     },
+     "error": null,
+     "latency_s": 4.8,
+     "usage": {
+      "in": 1856,
+      "out": 58
+     }
+    },
+    {
+     "idx": 4,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "화자가 이재명의 주장이 '집값 폭락'이라는 예측에 기반하여 정부에 대비하라고 요구하는 것으로 해석하고, 이를 '콧방귀'라는 비유로 경멸하며 강력히 반대하는 태도를 보임"
+     },
+     "error": null,
+     "latency_s": 6.3,
+     "usage": {
+      "in": 1891,
+      "out": 77
+     }
+    },
+    {
+     "idx": 5,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "중심 명제는 '정부의 경매 주택 매입 정책이 옳은 정책인가'라는 당위적 질문이며, 이는 참/거짓으로 검증 불가능한 평가이므로 opinion으로 분류됨"
+     },
+     "error": null,
+     "latency_s": 5.6,
+     "usage": {
+      "in": 1803,
+      "out": 70
+     }
+    },
+    {
+     "idx": 6,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "중심 명제인 '집값 폭락은 국민의 재산권 약탈이며 정부의 대량 매입 정책은 웃기다'는 참/거짓 판별이 불가능한 가치 판단과 평가로, 근거 제시 없이 강한 반대 태도를 드러냄"
+     },
+     "error": null,
+     "latency_s": 6.4,
+     "usage": {
+      "in": 1839,
+      "out": 80
+     }
+    },
+    {
+     "idx": 7,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "금리 상승이 주식과 부동산을 폭락시키고 국민을 가난하게 만든다는 예측과 이재명 대통령의 정책이 국민을 전복하는 거짓 정책이라고 강력하게 비난하는 평가가 중심 명제"
+     },
+     "error": null,
+     "latency_s": 5.6,
+     "usage": {
+      "in": 1834,
+      "out": 69
+     }
+    },
+    {
+     "idx": 8,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "금리 상승이 주식과 부동산을 폭락시켜 국민을 거지로 만든다고 단정하며, 이를 정책의 실패로 강력하게 비판"
+     },
+     "error": null,
+     "latency_s": 4.8,
+     "usage": {
+      "in": 1842,
+      "out": 58
+     }
+    },
+    {
+     "idx": 9,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "금리 상승이 국민을 신용불량자로 만든다고 단정하며 이재명 정권의 정책 실패를 강력하게 비판하는 예측과 평가"
+     },
+     "error": null,
+     "latency_s": 4.8,
+     "usage": {
+      "in": 1847,
+      "out": 58
+     }
+    },
+    {
+     "idx": 10,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "집값 폭락과 금리 상승이 국가 파산으로 이어질 것이라는 예측과 '제대로 된 정책입니까'라는 강한 비판적 평가가 중심 명제"
+     },
+     "error": null,
+     "latency_s": 4.9,
+     "usage": {
+      "in": 1790,
+      "out": 61
+     }
+    },
+    {
+     "idx": 11,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "중심 명제는 '이재명의 집값 폭등 예측이 틀릴 것이다'라는 전망이며, 이는 참/거짓으로 검증 불가능한 예측 (R6) 이므로 opinion 으로 분류되고, 정부 부동산 정책 실패를 암시하는 부정적 감정과 반대 태도를 가집니다."
+     },
+     "error": null,
+     "latency_s": 7.2,
+     "usage": {
+      "in": 1796,
+      "out": 90
+     }
+    },
+    {
+     "idx": 12,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "강남 집값 장기 하락을 부정하고 시장이 정부를 이긴다고 평가하는 화자의 예측과 해석이 중심 명제이며, 이는 검증 불가능한 의견에 해당합니다."
+     },
+     "error": null,
+     "latency_s": 5.3,
+     "usage": {
+      "in": 1828,
+      "out": 65
+     }
+    },
+    {
+     "idx": 13,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "이재명 정권이 장기적으로 시장 이길 수 있다고 단정하는 화자의 예측과 비판적 해석이 중심 명제이며, 검증 불가한 전망과 평가가 섞여 있어 opinion 유형으로 분류됩니다."
+     },
+     "error": null,
+     "latency_s": 5.7,
+     "usage": {
+      "in": 1879,
+      "out": 71
+     }
+    },
+    {
+     "idx": 14,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "이재명 대통령이 IMF 직후 3 억 6 천 원에 집을 사서 26 억에 팔았으며 세금도 거의 안 냈다는 근거 없는 전언을 통해 그의 행위를 배신으로 규정"
+     },
+     "error": null,
+     "latency_s": 5.8,
+     "usage": {
+      "in": 1865,
+      "out": 71
+     }
+    },
+    {
+     "idx": 15,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "이재명이 국민보다 더 많은 집을 소유한 것은 정당한 이기심이며 국민들의 투기는 정당한 이기심이 아니라는 강경한 가치 판단과 비난"
+     },
+     "error": null,
+     "latency_s": 5.1,
+     "usage": {
+      "in": 1845,
+      "out": 62
+     }
+    },
+    {
+     "idx": 16,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "이재명이 부동산 문제를 심각하게 보고 있지 않고 정부 정책을 긍정적으로 평가한다는 화자의 해석과 비판이 중심 명제이며, 참/거짓 판별이 불가능한 평가와 심리 추정에 해당한다"
+     },
+     "error": null,
+     "latency_s": 5.7,
+     "usage": {
+      "in": 1798,
+      "out": 71
+     }
+    },
+    {
+     "idx": 17,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "김용범 실장이 레버리지 도입과 부동산 정책 주도 등 국민 손실의 핵심 책임자라고 단정하며 배후 귀속을 주장"
+     },
+     "error": null,
+     "latency_s": 4.8,
+     "usage": {
+      "in": 1910,
+      "out": 57
+     }
+    },
+    {
+     "idx": 18,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "이재명의 지지율 하락 원인을 '부동산 주식' 등 외부 요인으로 규정하고, 이에 대한 반성 부재와 대법원장에게 특정 인사를 강요하는 '노골적인 협박'을 지적하며 강한 비판을 하고 있다"
+     },
+     "error": null,
+     "latency_s": 6.4,
+     "usage": {
+      "in": 1872,
+      "out": 80
+     }
+    },
+    {
+     "idx": 19,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "이재명이 기존 정책을 바꾸지 않고 '못 먹어도 고'로 일관할 것이라는 화자의 해석과 비판적 전망"
+     },
+     "error": null,
+     "latency_s": 4.4,
+     "usage": {
+      "in": 1813,
+      "out": 53
+     }
+    },
+    {
+     "idx": 20,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "이재명의 지지율이 반등할 수 없다는 예측과 검찰·정권의 무능함을 조롱하는 평가가 중심 명제이며, 근거 없는 단정적 예측과 강한 부정적 감정 표현이 특징"
+     },
+     "error": null,
+     "latency_s": 5.7,
+     "usage": {
+      "in": 1866,
+      "out": 70
+     }
+    },
+    {
+     "idx": 21,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "지주 폭락과 국민 거지화 예측을 근거로 부동산 정책의 실패를 강력히 비판하며, 세금 축소를 통한 거래 활성화가 최선임을 주장"
+     },
+     "error": null,
+     "latency_s": 5.3,
+     "usage": {
+      "in": 1959,
+      "out": 63
+     }
+    },
+    {
+     "idx": 22,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "이재명의 금리 경고와 정책이 국민을 협박하고 경제를 망친다고 평가하는 화자의 단정적 비판"
+     },
+     "error": null,
+     "latency_s": 4.8,
+     "usage": {
+      "in": 2067,
+      "out": 54
+     }
+    },
+    {
+     "idx": 23,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -2,
+      "reason": "김용범의 정책 추진이 지지율 폭락으로 이어질 것이라는 예측과 '불을 보듯 뻔하다'라는 강한 비하 표현을 사용한 평가적 발언"
+     },
+     "error": null,
+     "latency_s": 5.2,
+     "usage": {
+      "in": 1763,
+      "out": 64
+     }
+    }
+   ]
+  },
   "qwen3.5-9b-8bit+dict": {
    "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
    "provider": "openai",
-   "note": "현 임시 모델 · thinking off · 사전 주입",
+   "note": "현 임시 모델 · thinking off · 사전 주입 (이전 실행)",
    "score": {
     "n": 23,
     "errors": 0,

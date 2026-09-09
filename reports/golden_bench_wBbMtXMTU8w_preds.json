@@ -1,12 +1,235 @@
 {
- "generated": "2026-09-09T15:20:09+09:00",
+ "generated": "2026-09-09T20:58:45+09:00",
  "golden": "transcripts/golden/golden_wBbMtXMTU8w.jsonl",
- "prompt_sha": "9f2dc9881fde",
+ "prompt_sha": "3ba3a97f9e02",
  "models": {
+  "qwen3.5-9b-8bit@v2+dict": {
+   "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
+   "provider": "openai",
+   "note": "현 임시 모델 · thinking off · 프롬프트 v2 · 사전 주입",
+   "score": {
+    "n": 13,
+    "errors": 0,
+    "type_acc": 0.7692307692307693,
+    "type_f1_3": 0.2898550724637681,
+    "type_f1_2": 0.4347826086956522,
+    "type_classes_2": [
+     "fact",
+     "opinion"
+    ],
+    "sent_acc": 0.46153846153846156,
+    "sent_f1": 0.51010101010101,
+    "stance_mae": 1.5714285714285714,
+    "stance_n_both": 7,
+    "stance_null_match": 0.5384615384615384,
+    "stance_dir_match": 0.2857142857142857,
+    "stance_exact": 0.2857142857142857,
+    "latency_avg": 7.200000000000001,
+    "latency_total": 93.60000000000001,
+    "tokens_out_avg": 78.84615384615384
+   },
+   "preds": [
+    {
+     "idx": 1,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "중심 명제는 '세제 정상 의미가 퇴색했다'는 화자의 해석이며, 참/거짓 판별이 불가능한 평가이므로 opinion"
+     },
+     "error": null,
+     "latency_s": 10.5,
+     "usage": {
+      "in": 1977,
+      "out": 58
+     }
+    },
+    {
+     "idx": 2,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "중심 명제는 '부동산 세제 개편안이 악제가 될 수밖에 없다'는 화자의 평가이며, 이는 참/거짓으로 검증 불가능한 당위적 판단으로 opinion 유형이고, 화자는 해당 정책에 대해 부정적인 감정과 반대 입장을 취함"
+     },
+     "error": null,
+     "latency_s": 7.4,
+     "usage": {
+      "in": 2311,
+      "out": 82
+     }
+    },
+    {
+     "idx": 3,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "중심 명제는 '민주당이 부동산 세제 개편안을 발표하지 않은 것은 틀린 결정이며, 오히려 공급 중심 메시지와 폭탄 세제 대비 구제책 병행이 필요했다'는 평가로, 참/거짓 확인 불가한 당위적 판단과 정책 비판이므로 opinion이며, 대상인 민주당의 부동산 대응에 대해 비판적 태도를 보이고 있으므로 negative, 반대 성향으로 -1"
+     },
+     "error": null,
+     "latency_s": 9.9,
+     "usage": {
+      "in": 2255,
+      "out": 116
+     }
+    },
+    {
+     "idx": 4,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "positive",
+      "stance_score": 1,
+      "reason": "김민석 후보의 전략이 성공적이었다는 평가는 참/거짓으로 검증 불가능한 화자의 해석과 판단에 해당하며, 대상은 김민석 후보의 전략"
+     },
+     "error": null,
+     "latency_s": 5.5,
+     "usage": {
+      "in": 1836,
+      "out": 65
+     }
+    },
+    {
+     "idx": 5,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "제 3 자의 통화를 인용하여 충남 충북의 조직력 약화 및 3 대 메가 프로젝트로 인한 당원 심리 변화에 따른 호남 진출 전망을 제시하고 있으나, 이는 검증 불가능한 심리 분석과 예측에 해당한다"
+     },
+     "error": null,
+     "latency_s": 6.7,
+     "usage": {
+      "in": 2013,
+      "out": 79
+     }
+    },
+    {
+     "idx": 6,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "후보 간 경쟁이 격화되면 거친 말들이 나온다는 예측과 정청래 후보의 발언을 인용하여 김민석 후보에 대한 비판적 해석을 담고 있음"
+     },
+     "error": null,
+     "latency_s": 5.6,
+     "usage": {
+      "in": 1989,
+      "out": 65
+     }
+    },
+    {
+     "idx": 7,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "김민석 의원이 신천지 의혹을 제기한 행위를 '거짓'으로 규정하고 심판에 재수 안 할 것이라고 단정하며, 이를 야당 대표로서 부적절하고 당내 갈등을 부추기는 행동으로 평가"
+     },
+     "error": null,
+     "latency_s": 6.5,
+     "usage": {
+      "in": 1895,
+      "out": 78
+     }
+    },
+    {
+     "idx": 8,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "집권여당 전당대회의 품격과 수위가 낮고 국민적 신뢰를 잃었다는 평가와 정책 경쟁이 공허하다는 해석이 중심 명제이며, 참/거짓 판별이 불가능한 가치 판단과 해석에 해당합니다."
+     },
+     "error": null,
+     "latency_s": 6.9,
+     "usage": {
+      "in": 1984,
+      "out": 81
+     }
+    },
+    {
+     "idx": 9,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "정청래 후보의 전략 변화와 당내 갈등 심화 가능성을 '예측'하고 '갈등'을 우려하는 평가적 발언이 중심 명제이므로 opinion이며, 민주당 내 분열과 정청래 캠프의 수위 저하를 비판적으로 바라보는 negative tone과 반대/비판적 성향의 -1 점수를 부여합니다."
+     },
+     "error": null,
+     "latency_s": 8.8,
+     "usage": {
+      "in": 2150,
+      "out": 104
+     }
+    },
+    {
+     "idx": 10,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "중심 명제는 '이번 전당대회 갈등이 봉합이 어렵고 당이 쪼개질 수 있다'는 예측이며, 이는 참/거짓으로 검증 불가능한 전망으로 opinion 유형이고, 화자는 치열한 공세와 윤리 재소 요구를 근거로 민주당의 화합 가능성을 부정적으로 평가하는 태도를 보임"
+     },
+     "error": null,
+     "latency_s": 8.4,
+     "usage": {
+      "in": 2039,
+      "out": 101
+     }
+    },
+    {
+     "idx": 11,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "2007 년 친의친박 갈등과 비견될 정도로 당내 공세가 격화되고 봉합이 어렵다는 화자의 주관적 평가와 전망"
+     },
+     "error": null,
+     "latency_s": 5.3,
+     "usage": {
+      "in": 1945,
+      "out": 61
+     }
+    },
+    {
+     "idx": 12,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": 0,
+      "reason": "중심 명제는 '내년 서울시장 선거가 있을 경우 갈등이 재점화될 것이다'라는 예측이며, 이는 참/거짓으로 검증 불가능한 전망으로 opinion 유형에 해당합니다."
+     },
+     "error": null,
+     "latency_s": 6.2,
+     "usage": {
+      "in": 2147,
+      "out": 69
+     }
+    },
+    {
+     "idx": 13,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "수속 최고위원의 향후 발언 방향과 중요성에 대한 화자의 추측과 해석이 중심 명제이며, 이는 참/거짓으로 검증 불가능한 예측과 해석에 해당한다."
+     },
+     "error": null,
+     "latency_s": 5.9,
+     "usage": {
+      "in": 2110,
+      "out": 66
+     }
+    }
+   ]
+  },
   "qwen3.5-9b-8bit+dict": {
    "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
    "provider": "openai",
-   "note": "현 임시 모델 · thinking off · 사전 주입",
+   "note": "현 임시 모델 · thinking off · 사전 주입 (이전 실행)",
    "score": {
     "n": 13,
     "errors": 0,
@@ -229,7 +452,7 @@
   "qwen3.5-9b-8bit": {
    "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
    "provider": "openai",
-   "note": "현 임시 모델 · thinking off (이전 실행) (이전 실행)",
+   "note": "현 임시 모델 · thinking off (이전 실행)",
    "score": {
     "n": 13,
     "errors": 0,

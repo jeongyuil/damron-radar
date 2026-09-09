@@ -143,6 +143,43 @@ SYSTEM_PROMPT = """당신은 한국 정치·시사 유튜브 담론 분석가입
 JSON 객체 하나만 출력합니다. 설명·마크다운 금지.
 {"type": "fact|claim|opinion", "sentiment": "positive|negative|neutral", "stance_score": -2|-1|0|1|2|null, "reason": "판단 근거 한 문장(결정 트리 ①②의 답 포함)"}"""
 
+SYSTEM_PROMPT_V2 = """당신은 한국 정치·시사 유튜브 담론 분석가입니다. 주어진 발언 하나(자동자막 전사 — 오탈자·끊김이 있으나 원문 그대로입니다)를 세 축으로 분류합니다.
+
+## 1. type — 발언 유형 (PRD §6.2 결정 트리, 반드시 이 순서로)
+
+먼저 **중심 명제**를 정합니다. 발언에 사실 전달과 평가가 섞여 있으면 화자가 말하려는 **결론 문장**이 중심 명제입니다. 타인의 발언을 전달하는 경우, 그 발언 사실("X가 이렇게 말했다")이 아니라 화자가 그것을 근거로 무엇을 말하는지가 중심입니다.
+
+① 중심 명제를 제3자가 참/거짓으로 확인하는 것이 **원리상** 가능한가?
+   - 아니오 → "opinion". 평가·가치 판단·해석·심경·당위("~해야 한다")·**예측/전망("~할 것이다", "~하겠죠", 인과를 붙인 예측 포함)**·수사 의문·비유.
+   - 예 → ②
+② 화자가 **근거를 하나라도** 제시했는가? 근거란 다음 중 **하나 이상**입니다:
+   (a) 출처·기관·발화자 특정("갤럽 조사", "연합뉴스", "박지원 의원이 말했다")
+   (b) 구체 수치·날짜("3.4%", "24일", "247만 표")
+   (c) 공개 자료 지칭(SNS 글, 기사 링크, 판결문, 법 조문, 공식 발표, 기자회견)
+   (d) 화자의 직접 확인("통화해 보니", "취재해 보니", "제가 확인한 바로는")
+   - 예 → "fact". **세 요소가 모두 필요하지 않습니다.** "이재명 대통령이 X에 모건스탠리 기사를 링크했다"는 (c)만으로 fact입니다.
+   - 아니오 → "claim". 출처 없는 전언("~라고 한다", "들었다", "얘기가 나온다"), 근거 없는 단정("사실상 ~다", "배후는 ~다"), 화자 스스로 불확실한 수치("65% 됐었나?").
+
+| 유형 | 정의 | 예시 |
+|---|---|---|
+| fact | 검증 가능한 명제 + 근거 (a)~(d) 중 하나 이상 | "어제 발표된 갤럽 조사에서 지지율이 3%p 하락했다" |
+| claim | 검증 가능한 명제이나 근거 없음·불충분 | "이 법안은 사실상 ○○의 요구로 만들어진 것이다" |
+| opinion | 참/거짓 판별 불가 (평가·예측·해석·당위) | "이건 국민을 무시하는 오만한 태도다", "금리가 오르면 집값은 폭락할 것이다" |
+
+흔한 실수: 근거가 있는 사실 전달을 "수치·출처·일시가 다 없다"는 이유로 claim으로 내리지 마세요. 반대로, 예측은 근거가 붙어 있어도 opinion입니다.
+
+## 2. sentiment — 발언 대상에 대한 화자의 감정
+"positive" | "negative" | "neutral". 담담한 상황 설명·중계·양비론은 neutral.
+
+## 3. stance_score — 발언이 다루는 **대상**에 대한 화자의 찬반
+대상 = 이 발언이 평가하는 것(특정 인물의 발언·행위, 정책·법안, 주장). 그 대상을 지지·옹호하면 +, 반대·비판하면 −.
+정수 −2(강한 반대, 단정·조롱·"배신") · −1(반대, 온건·조건부) · 0(양쪽 병기·유보) · +1(지지) · +2(강한 지지).
+대상이 없는 순수 사실 전달·인사말·질문은 null. [영상 컨텍스트]의 이슈는 대상을 찾는 힌트일 뿐, 부호는 대상 기준입니다.
+
+## 출력
+JSON 객체 하나만 출력합니다. 설명·마크다운 금지. reason 안에서는 큰따옴표를 쓰지 마세요.
+{"type": "fact|claim|opinion", "sentiment": "positive|negative|neutral", "stance_score": -2|-1|0|1|2|null, "reason": "중심 명제 + ①②의 답 + stance 대상, 한 문장"}"""
+
 OUTPUT_SCHEMA = {
     "type": "object",
     "properties": {
@@ -181,8 +218,12 @@ def load_dict_block(issue_slugs: list[str]) -> str:
     return "\n".join(lines)
 
 
+PROMPT_VERSION = "v1"
+
+
 def system_prompt() -> str:
-    return SYSTEM_PROMPT + DICT_BLOCK
+    base = SYSTEM_PROMPT_V2 if PROMPT_VERSION == "v2" else SYSTEM_PROMPT
+    return base + DICT_BLOCK
 
 
 def prompt_sha() -> str:
@@ -653,6 +694,12 @@ def main() -> None:
         "--no-merge", action="store_true", help="이전 실행 결과(preds.json)와 병합하지 않음"
     )
     ap.add_argument(
+        "--prompt",
+        default="v1",
+        choices=["v1", "v2"],
+        help="시스템 프롬프트 버전 (v2: 근거 요건 완화·예측=opinion·stance 대상 기준 명시). 후보명에 @v2 접미",
+    )
+    ap.add_argument(
         "--with-dict",
         action="store_true",
         help="판례집 규칙 + stance 부호 규칙을 프롬프트에 주입 (후보명에 +dict 접미)",
@@ -664,7 +711,12 @@ def main() -> None:
     )
     args = ap.parse_args()
 
-    global DICT_BLOCK
+    global DICT_BLOCK, PROMPT_VERSION
+    PROMPT_VERSION = args.prompt
+    if args.prompt != "v1":
+        for c in CANDIDATES:
+            c.name += f"@{args.prompt}"
+            c.note += f" · 프롬프트 {args.prompt}"
     if args.with_dict:
         DICT_BLOCK = load_dict_block([x.strip() for x in args.issue_slugs.split(",")])
         for c in CANDIDATES:
@@ -739,7 +791,12 @@ def main() -> None:
             if not same:
                 print(f"  ⚠️ 이전 결과 {name} 폐기 (골든셋 변경)")
                 continue
-            c = Candidate(name, m["provider"], m["model"], note=m.get("note", "").replace(" (이전 실행)", "") + " (이전 실행)")
+            c = Candidate(
+                name,
+                m["provider"],
+                m["model"],
+                note=m.get("note", "").replace(" (이전 실행)", "") + " (이전 실행)",
+            )
             results[name] = {
                 "cand": c,
                 "preds": m["preds"],
