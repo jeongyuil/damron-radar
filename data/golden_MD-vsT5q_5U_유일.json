@@ -1,0 +1,127 @@
+{
+ "video_id": "MD-vsT5q_5U",
+ "labeler": "유일",
+ "labeled_at": "2026-09-09T11:25:16.515Z",
+ "labels": [
+  {
+   "idx": 1,
+   "start_ms": 1309,
+   "end_ms": 66145,
+   "type": "fact",
+   "sentiment": "negative",
+   "stance_score": -2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 2,
+   "start_ms": 66155,
+   "end_ms": 96789,
+   "type": "fact",
+   "sentiment": "negative",
+   "stance_score": -2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 3,
+   "start_ms": 96799,
+   "end_ms": 141550,
+   "type": "claim",
+   "sentiment": "negative",
+   "stance_score": -2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 4,
+   "start_ms": 141560,
+   "end_ms": 205007,
+   "type": "claim",
+   "sentiment": "negative",
+   "stance_score": -2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 5,
+   "start_ms": 205017,
+   "end_ms": 245149,
+   "type": "fact",
+   "sentiment": "negative",
+   "stance_score": -2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 6,
+   "start_ms": 245159,
+   "end_ms": 292070,
+   "type": "opinion",
+   "sentiment": "negative",
+   "stance_score": -1,
+   "issue": "election-fraud-allegation",
+   "note": "주장과 의견이 섞여있음"
+  },
+  {
+   "idx": 7,
+   "start_ms": 292080,
+   "end_ms": 345909,
+   "type": "claim",
+   "sentiment": "negative",
+   "stance_score": -2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 8,
+   "start_ms": 345919,
+   "end_ms": 372350,
+   "type": "claim",
+   "sentiment": "negative",
+   "stance_score": 0,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 9,
+   "start_ms": 372360,
+   "end_ms": 407830,
+   "type": "claim",
+   "sentiment": "negative",
+   "stance_score": -1,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 10,
+   "start_ms": 407840,
+   "end_ms": 434075,
+   "type": "claim",
+   "sentiment": "negative",
+   "stance_score": -2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 11,
+   "start_ms": 434075,
+   "end_ms": 460309,
+   "type": "opinion",
+   "sentiment": "positive",
+   "stance_score": 2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  },
+  {
+   "idx": 12,
+   "start_ms": 460319,
+   "end_ms": 483560,
+   "type": "opinion",
+   "sentiment": "negative",
+   "stance_score": -2,
+   "issue": "election-fraud-allegation",
+   "note": ""
+  }
+ ]
+}
