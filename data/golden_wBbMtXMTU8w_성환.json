@@ -1,0 +1,124 @@
+{
+ "video_id": "wBbMtXMTU8w",
+ "labeler": "성환",
+ "labeled_at": "2026-08-05T13:39:38.264Z",
+ "labels": [
+  {
+   "idx": 1,
+   "start_ms": 47920,
+   "end_ms": 101040,
+   "type": "opinion",
+   "sentiment": "negative",
+   "stance_score": -1,
+   "note": ""
+  },
+  {
+   "idx": 2,
+   "start_ms": 375759,
+   "end_ms": 504919,
+   "type": "fact",
+   "sentiment": "neutral",
+   "stance_score": null,
+   "note": ""
+  },
+  {
+   "idx": 3,
+   "start_ms": 750360,
+   "end_ms": 850720,
+   "type": "opinion",
+   "sentiment": "neutral",
+   "stance_score": null,
+   "note": ""
+  },
+  {
+   "idx": 4,
+   "start_ms": 1172799,
+   "end_ms": 1180840,
+   "type": "opinion",
+   "sentiment": "positive",
+   "stance_score": 1,
+   "note": ""
+  },
+  {
+   "idx": 5,
+   "start_ms": 1180840,
+   "end_ms": 1226880,
+   "type": "opinion",
+   "sentiment": "positive",
+   "stance_score": 1,
+   "note": ""
+  },
+  {
+   "idx": 6,
+   "start_ms": 1228480,
+   "end_ms": 1280799,
+   "type": "fact",
+   "sentiment": "neutral",
+   "stance_score": 2,
+   "note": ""
+  },
+  {
+   "idx": 7,
+   "start_ms": 1244880,
+   "end_ms": 1271880,
+   "type": "opinion",
+   "sentiment": "negative",
+   "stance_score": 2,
+   "note": ""
+  },
+  {
+   "idx": 8,
+   "start_ms": 1280799,
+   "end_ms": 1327600,
+   "type": "opinion",
+   "sentiment": "negative",
+   "stance_score": -1,
+   "note": ""
+  },
+  {
+   "idx": 9,
+   "start_ms": 1327600,
+   "end_ms": 1405279,
+   "type": "opinion",
+   "sentiment": "negative",
+   "stance_score": 1,
+   "note": ""
+  },
+  {
+   "idx": 10,
+   "start_ms": 1392000,
+   "end_ms": 1455000,
+   "type": "opinion",
+   "sentiment": "neutral",
+   "stance_score": 1,
+   "note": ""
+  },
+  {
+   "idx": 11,
+   "start_ms": 1431640,
+   "end_ms": 1467840,
+   "type": "fact",
+   "sentiment": "neutral",
+   "stance_score": 0,
+   "note": ""
+  },
+  {
+   "idx": 12,
+   "start_ms": 1467840,
+   "end_ms": 1551240,
+   "type": "opinion",
+   "sentiment": "neutral",
+   "stance_score": null,
+   "note": ""
+  },
+  {
+   "idx": 13,
+   "start_ms": 1551240,
+   "end_ms": 1611120,
+   "type": "opinion",
+   "sentiment": "neutral",
+   "stance_score": 0,
+   "note": ""
+  }
+ ]
+}

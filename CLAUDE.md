@@ -38,3 +38,4 @@
 
 `docker compose up -d` (Postgres+pgvector, 스키마 자동적용 · Metabase :3000) / `uv sync` / 키는 `.env`(비커밋)
 실사: `uv run python scripts/audit_channels.py` (YouTube API로 채널 지표 실측)
+골든셋 선발전: `caffeinate -i uv run python -u scripts/golden_bench.py` (후보 모델 type/sentiment/stance 채점 → `reports/golden_bench_<vid>.md`)

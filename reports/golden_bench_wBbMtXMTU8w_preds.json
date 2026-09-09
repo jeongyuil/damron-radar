@@ -1,0 +1,454 @@
+{
+ "generated": "2026-09-09T15:20:09+09:00",
+ "golden": "transcripts/golden/golden_wBbMtXMTU8w.jsonl",
+ "prompt_sha": "9f2dc9881fde",
+ "models": {
+  "qwen3.5-9b-8bit+dict": {
+   "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
+   "provider": "openai",
+   "note": "현 임시 모델 · thinking off · 사전 주입",
+   "score": {
+    "n": 13,
+    "errors": 0,
+    "type_acc": 0.6153846153846154,
+    "type_f1_3": 0.2666666666666667,
+    "type_f1_2": 0.4000000000000001,
+    "type_classes_2": [
+     "fact",
+     "opinion"
+    ],
+    "sent_acc": 0.5384615384615384,
+    "sent_f1": 0.5606837606837606,
+    "stance_mae": 1.375,
+    "stance_n_both": 8,
+    "stance_null_match": 0.6923076923076923,
+    "stance_dir_match": 0.375,
+    "stance_exact": 0.375,
+    "latency_avg": 7.800000000000001,
+    "latency_total": 101.4,
+    "tokens_out_avg": 87.38461538461539
+   },
+   "preds": [
+    {
+     "idx": 1,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 가능한 명제(부동산 세제 개편안 내용)를 전언 형태로 제시했으나 구체적인 수치나 출처를 명시하지 않아 claim으로 분류되며, 정부의 정책이 극소수만 부담을 늘리고 세제 정상 의미가 퇴색되었다고 비판하는 어조로 negative sentiment과 -1 stance를 가짐"
+     },
+     "error": null,
+     "latency_s": 9.3,
+     "usage": {
+      "in": 1777,
+      "out": 93
+     }
+    },
+    {
+     "idx": 2,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 가능한 명제(부동산 세제 개편안이 악재가 될 수 있다)를 주장하지만, 화자가 직접 확인한 구체적 근거 (통화 내용 등) 를 제시하지 않고 '악제가 될 수밖에 없다'는 해석적 결론에 그쳐 claim 으로 분류되며, 민주당 정부에 대한 부정적 전망과 비판적 어조를 보여 negative, 민주당 정부 정책 (부동산 세제) 에 대한 반대 입장을 반영하여 stance_score -1 입니다."
+     },
+     "error": null,
+     "latency_s": 10.9,
+     "usage": {
+      "in": 2111,
+      "out": 123
+     }
+    },
+    {
+     "idx": 3,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 가능한 명제(부동산 정책이 아닌 조세 정책이라는 주장, 공급 속도 확대 등)를 제시했으나 구체적인 수치나 출처 없이 화자의 해석과 전언에 의존하므로 claim이며, 정부 부동산/조세 정책의 효과 부재와 시장 왜곡 가능성을 지적하여 negative, 민주당 내부의 대응 실패를 비판하여 stance_score -1"
+     },
+     "error": null,
+     "latency_s": 9.1,
+     "usage": {
+      "in": 2055,
+      "out": 101
+     }
+    },
+    {
+     "idx": 4,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "positive",
+      "stance_score": 1,
+      "reason": "화자가 김민석 후보의 전략을 '성공적이었다'고 평가하는 것은 검증 불가능한 가치 판단 및 해석에 해당하므로 opinion 유형이며, 민주당 전당대회 이슈에 대해 김민석 노선을 지지하는 (+1) 입장입니다."
+     },
+     "error": null,
+     "latency_s": 6.8,
+     "usage": {
+      "in": 1636,
+      "out": 80
+     }
+    },
+    {
+     "idx": 5,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "제 3 자의 추측과 전망 ('먹힌 거 같다', '먹히지 않겠느냐') 을 전달하고 있으나, 이는 검증 불가능한 심리 분석 및 예측에 해당하므로 opinion 으로 분류됩니다."
+     },
+     "error": null,
+     "latency_s": 6.4,
+     "usage": {
+      "in": 1813,
+      "out": 71
+     }
+    },
+    {
+     "idx": 6,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "① 검증 불가 (화자의 해석 및 심리 추측) + ② 근거 없음: 화자가 후보들의 발언을 '거친 말'로 규정하고 출마 동기를 '왜 나오려 그러냐'는 부정적 해석과 심리 추측 (부정적 평가) 을 제시했기 때문입니다. [json-repair]"
+     },
+     "error": null,
+     "latency_s": 8.1,
+     "usage": {
+      "in": 1789,
+      "out": 93
+     }
+    },
+    {
+     "idx": 7,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 불가능한 심리·의도 해석('왜 나오려 그러냐?')과 가치 판단이 중심 명제이므로 opinion이며, 정청래 캠프의 행위를 비판하는 부정적 감정과 민주당 전당대회 관련 이슈에 대한 반대 입장을 드러냄."
+     },
+     "error": null,
+     "latency_s": 7.3,
+     "usage": {
+      "in": 1695,
+      "out": 85
+     }
+    },
+    {
+     "idx": 8,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 불가능한 가치 판단과 해석이 중심 명제이며, 민주당 전당대회의 품격과 노선 경쟁의 공허함을 비판하는 부정적 태도를 드러냄"
+     },
+     "error": null,
+     "latency_s": 5.8,
+     "usage": {
+      "in": 1784,
+      "out": 64
+     }
+    },
+    {
+     "idx": 9,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "화자가 정청래 캠프의 전략 전환을 '예측했던 플랜이 뒤집어졌다'고 해석하고, 향후 갈등을 '당 쪼개질 정도'로 비관적으로 전망하는 것은 검증 불가능한 해석과 예측이므로 opinion이며, 정청래 캠프에 대한 부정적 평가와 분열 우려로 인해 stance_score는 -1입니다."
+     },
+     "error": null,
+     "latency_s": 9.5,
+     "usage": {
+      "in": 1950,
+      "out": 109
+     }
+    },
+    {
+     "idx": 10,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "화자가 전당대회 결과 후의 화합 가능성에 대해 '봉합이 어렵지 않을까'라는 부정적 전망과 해석을 제시하여 검증 불가능한 의견으로 분류되며, 민주당 조직의 분열 가능성을 우려하는 부정적 감정과 반대 입장을 드러냄."
+     },
+     "error": null,
+     "latency_s": 7.2,
+     "usage": {
+      "in": 1839,
+      "out": 82
+     }
+    },
+    {
+     "idx": 11,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "화자가 전당대회의 경쟁 강도와 갈등 수준을 '2007 년 친의친박 갈등'과 비견하며 상황을 부정적으로 평가하고 있으므로 검증 불가능한 해석적 명제 (opinion) 로 분류되며, 민주당 전당대회 이슈에 대해 갈등 심화를 우려하는 반대 (-1) 의 입장을 취함."
+     },
+     "error": null,
+     "latency_s": 8.3,
+     "usage": {
+      "in": 1745,
+      "out": 97
+     }
+    },
+    {
+     "idx": 12,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "화자가 갈등이 수면 아래로 내려갈 것이라거나 당이 깨질 것 같지 않다는 전망을 제시하고 있어 검증 불가능한 예측 (opinion) 으로 분류되며, 특정 이슈에 대한 지지/반대 입장을 드러내지 않았습니다."
+     },
+     "error": null,
+     "latency_s": 7.2,
+     "usage": {
+      "in": 1947,
+      "out": 79
+     }
+    },
+    {
+     "idx": 13,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "① 수속 최고위원의 향후 발언 내용이나 메시지 방향을 제3자가 참/거짓으로 확인하는 것은 원리상 불가능하므로 opinion 으로 분류"
+     },
+     "error": null,
+     "latency_s": 5.5,
+     "usage": {
+      "in": 1910,
+      "out": 59
+     }
+    }
+   ]
+  },
+  "qwen3.5-9b-8bit": {
+   "model": "lmstudio-community/Qwen3.5-9B-MLX-8bit",
+   "provider": "openai",
+   "note": "현 임시 모델 · thinking off (이전 실행) (이전 실행)",
+   "score": {
+    "n": 13,
+    "errors": 0,
+    "type_acc": 0.5384615384615384,
+    "type_f1_3": 0.24561403508771926,
+    "type_f1_2": 0.36842105263157887,
+    "type_classes_2": [
+     "fact",
+     "opinion"
+    ],
+    "sent_acc": 0.46153846153846156,
+    "sent_f1": 0.51010101010101,
+    "stance_mae": 1.5714285714285714,
+    "stance_n_both": 7,
+    "stance_null_match": 0.6153846153846154,
+    "stance_dir_match": 0.2857142857142857,
+    "stance_exact": 0.2857142857142857,
+    "latency_avg": 6.453846153846154,
+    "latency_total": 83.9,
+    "tokens_out_avg": 71.76923076923077
+   },
+   "preds": [
+    {
+     "idx": 1,
+     "pred": {
+      "type": "claim",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "검증 가능한 명제(부동산 세제 개편안 내용)를 전달하지만, 구체적인 수치나 출처를 제시하지 않고 '핵심 요약'이라는 전언 형태로만 언급했으므로 claim으로 분류합니다."
+     },
+     "error": null,
+     "latency_s": 7.0,
+     "usage": {
+      "in": 1072,
+      "out": 70
+     }
+    },
+    {
+     "idx": 2,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 가능한 명제 (부동산 세제 개편안이 악재가 될 수밖에 없다) 를 제시했으나, 구체적인 수치나 출처 등 근거를 제시하지 못했으므로 claim 으로 분류되며, 화자는 부동산 문제와 민주당 정부의 대응에 대해 부정적인 감정과 비판적 입장을 보이고 있습니다."
+     },
+     "error": null,
+     "latency_s": 7.7,
+     "usage": {
+      "in": 1406,
+      "out": 87
+     }
+    },
+    {
+     "idx": 3,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 가능한 명제(부동산 대책 발표 시점이 시선 분산 효과를 놓친 것으로 분석됨)를 제시했으나, 구체적인 수치나 출처 등 검증에 필요한 구체적 근거가 부재하여 claim으로 분류되며, 화자는 정부의 부동산 대응 전략을 비판적으로 평가하고 있습니다."
+     },
+     "error": null,
+     "latency_s": 7.5,
+     "usage": {
+      "in": 1350,
+      "out": 86
+     }
+    },
+    {
+     "idx": 4,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "positive",
+      "stance_score": 1,
+      "reason": "검증 불가능한 가치 판단 및 해석으로 'opinion'이며, 김민석 후보의 전략을 성공적이라고 긍정적으로 평가하여 stance_score 1"
+     },
+     "error": null,
+     "latency_s": 5.0,
+     "usage": {
+      "in": 931,
+      "out": 60
+     }
+    },
+    {
+     "idx": 5,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "제 3 자의 추측과 전망을 전언한 것으로, 검증 가능한 구체적 근거가 부재하여 참/거짓을 확인할 수 없는 해석적 발언입니다."
+     },
+     "error": null,
+     "latency_s": 5.5,
+     "usage": {
+      "in": 1108,
+      "out": 63
+     }
+    },
+    {
+     "idx": 6,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 불가능한 심경 및 해석적 발언으로, 후보들의 동기를 '왜 나오려 그러냐'며 부정적으로 평가하고 있습니다."
+     },
+     "error": null,
+     "latency_s": 4.9,
+     "usage": {
+      "in": 1084,
+      "out": 57
+     }
+    },
+    {
+     "idx": 7,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 가능한 명제(김민석 의원이 교사를 통해 신천지 의혹을 제기함)를 전언 형태로 제시했으나 구체적 근거 (출처·일시·증거) 가 부재하며, 해당 의혹이 사실로 확인될 경우 김민석 의원에게 불이익이 있을 것이라는 부정적 전망을 담고 있음"
+     },
+     "error": null,
+     "latency_s": 7.9,
+     "usage": {
+      "in": 990,
+      "out": 97
+     }
+    },
+    {
+     "idx": 8,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 불가능한 가치 판단과 해석이 중심이며, 민주당 전당대회의 품격과 경쟁 노선을 부정적으로 평가하는 태도를 드러냄"
+     },
+     "error": null,
+     "latency_s": 5.2,
+     "usage": {
+      "in": 1079,
+      "out": 58
+     }
+    },
+    {
+     "idx": 9,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 불가능한 예측과 해석이 중심인 의견이며, 정청래 캠프의 전략 전환과 갈등 전망을 부정적으로 평가하는 태도를 보입니다."
+     },
+     "error": null,
+     "latency_s": 5.8,
+     "usage": {
+      "in": 1245,
+      "out": 61
+     }
+    },
+    {
+     "idx": 10,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 불가능한 예측과 해석이 중심인 opinion 유형이며, 화자는 민주당의 치열한 경쟁이 향후 심각한 분열과 봉합 불가로 이어질 것이라고 부정적으로 전망하고 있습니다."
+     },
+     "error": null,
+     "latency_s": 6.3,
+     "usage": {
+      "in": 1134,
+      "out": 68
+     }
+    },
+    {
+     "idx": 11,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "negative",
+      "stance_score": -1,
+      "reason": "검증 불가능한 화자의 주관적 심경과 비유적 해석 (2007 년 친의친박 갈등 비견) 이 중심 명제이므로 opinion 으로 분류되며, 당내 갈등 심화와 봉합 어려움에 대한 부정적 평가와 함께 민주당 전당대회 이슈에 대해 반대/비판적 입장을 나타냄"
+     },
+     "error": null,
+     "latency_s": 8.7,
+     "usage": {
+      "in": 1040,
+      "out": 98
+     }
+    },
+    {
+     "idx": 12,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "검증 가능한 구체적 명제나 근거가 없는 당내 갈등 전망과 해석이 중심이므로 opinion 으로 분류됩니다."
+     },
+     "error": null,
+     "latency_s": 5.2,
+     "usage": {
+      "in": 1242,
+      "out": 52
+     }
+    },
+    {
+     "idx": 13,
+     "pred": {
+      "type": "opinion",
+      "sentiment": "neutral",
+      "stance_score": null,
+      "reason": "화자가 수속 최고위원의 향후 발언 방향 (원보이스 vs 문제 지적) 을 예측하고 그 중요성을 해석하고 있으나, 이는 제 3 자가 참/거짓으로 검증할 수 없는 가치 판단 및 전망에 해당합니다."
+     },
+     "error": null,
+     "latency_s": 7.2,
+     "usage": {
+      "in": 1205,
+      "out": 76
+     }
+    }
+   ]
+  }
+ },
+ "skipped": {}
+}
