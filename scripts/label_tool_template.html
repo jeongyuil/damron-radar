@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>라벨링 — __TITLE__</title>
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--line:#e2e2de;--ink:#1d1d1b;--mut:#6b6b66;--acc:#2b5fd9;--warn:#b54708;--ok:#1a7f4b;--del:#c62828}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+header{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);padding:10px 20px;z-index:5;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+header h1{font-size:15px;margin:0 8px 0 0}header a{color:var(--acc)}
+.pill{background:#eef2fb;border-radius:999px;padding:3px 10px;font-size:12px;color:var(--acc)}
+.guide{margin:14px 20px;padding:12px 16px;background:#fffbea;border:1px solid #f1e3a3;border-radius:8px;font-size:13px}
+.guide b{color:var(--warn)}details summary{cursor:pointer;font-weight:600}
+main{padding:0 20px 80px}
+.row{display:grid;grid-template-columns:52px 1fr 360px;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.row.done{border-color:#bfe3cf;background:#f6fcf8}.row.del{opacity:.45;background:#fafafa}.row.del .tx{text-decoration:line-through}
+.idx{font-weight:700;color:var(--mut)}.idx a{display:block;font-size:12px;color:var(--acc);text-decoration:none;font-weight:500}
+.tx{white-space:pre-wrap;word-break:keep-all}
+.ctl{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start}
+.ctl label{font-size:11px;color:var(--mut);display:block}
+select,input{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font:inherit;background:#fff}
+select:invalid{color:var(--mut)}.full{grid-column:1/3}
+.btns{grid-column:1/3;display:flex;gap:6px}.btns button{flex:1;padding:5px;border:1px solid var(--line);background:#fafafa;border-radius:6px;cursor:pointer;font-size:12px}
+.btns button:hover{background:#eee}
+footer{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);padding:10px 20px;display:flex;gap:10px;align-items:center;z-index:5}
+footer button{padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font:inherit}
+footer .primary{background:var(--acc);color:#fff;border-color:var(--acc)}footer .primary:disabled{opacity:.4;cursor:not-allowed}
+#status{margin-left:auto;color:var(--mut);font-size:12px}
+</style></head><body>
+<header>
+  <h1>__CHANNEL__ · __TITLE__</h1>
+  <a href="https://youtube.com/watch?v=__VID__" target="_blank">영상 열기</a>
+  <span class="pill" id="prog">0 / 0</span>
+  <label style="font-size:12px;color:var(--mut)">라벨러 <input id="labeler" style="width:90px;display:inline-block" placeholder="이름"></label>
+</header>
+<div class="guide"><details open><summary>판단 기준 (PRD §6.2)</summary>
+<b>type</b> ① 제3자가 참/거짓을 원리상 확인할 수 있나? 아니오 → <b>opinion</b>(평가·예측·해석·당위) · 예 → ② 화자가 근거(수치·출처·일시·직접 확인)를 제시했나? 예 → <b>fact</b> · 아니오/전언("들었다") → <b>claim</b>.
+사실+평가가 섞이면 화자의 <b>결론 문장</b> 기준. 타인 발언 전달은 <b>원발화자</b>의 명제로(헷갈리면 메모에 "인용").<br>
+<b>sentiment</b> 발언 대상에 대한 화자 감정. 담담한 설명·중계는 neutral. &nbsp; <b>stance</b> 이슈에 대한 입장 −2~+2, 이슈 무관·입장 없음이면 null. (+ = __PLUS__)<br>
+인사말·광고·잡담 구간은 <b>삭제</b>. 발언 하나가 두 구간에 걸치면 <b>다음과 병합</b>. 자동 저장됩니다(이 브라우저).
+</details></div>
+<main id="rows"></main>
+<footer>
+  <button class="primary" id="dl">완료 — JSON 다운로드</button>
+  <button id="save">임시저장 파일</button>
+  <button id="load">임시저장 불러오기</button><input type="file" id="file" accept=".json" hidden>
+  <button id="reset" style="color:var(--del)">초기화</button>
+  <span id="status"></span>
+</footer>
+<datalist id="issues">__ISSUES__</datalist>
+<script>
+const VID="__VID__", KEY="label_"+VID, ISSUE_DEFAULT="__ISSUE_DEFAULT__";
+const SEED=__SPANS__;
+let rows=JSON.parse(localStorage.getItem(KEY)||"null")||SEED.map(s=>({...s,type:"",sentiment:"",stance:"",issue:ISSUE_DEFAULT,note:"",del:false}));
+const $=s=>document.querySelector(s);
+const fmt=ms=>{const s=Math.floor(ms/1000);return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`};
+function render(){
+  const m=$("#rows");m.innerHTML="";
+  rows.forEach((r,i)=>{
+    const d=document.createElement("div");d.className="row"+(r.del?" del":(r.type&&r.sentiment?" done":""));
+    d.innerHTML=`<div class="idx">${i+1}<a href="https://youtube.com/watch?v=${VID}&t=${Math.floor(r.start_ms/1000)}s" target="_blank">${fmt(r.start_ms)}–${fmt(r.end_ms)}</a></div>
+    <div class="tx">${r.transcript}</div>
+    <div class="ctl">
+      <div><label>type</label><select data-k="type" required><option value="">—</option><option>fact</option><option>claim</option><option>opinion</option></select></div>
+      <div><label>sentiment</label><select data-k="sentiment" required><option value="">—</option><option>positive</option><option>negative</option><option>neutral</option></select></div>
+      <div><label>stance</label><select data-k="stance"><option value="">null</option><option>-2</option><option>-1</option><option>0</option><option>1</option><option>2</option></select></div>
+      <div><label>issue</label><input data-k="issue" list="issues"></div>
+      <div class="full"><label>메모 (판단 이유·경계 사례)</label><input data-k="note" placeholder="예: 수치는 있으나 결론이 해석 / 인용"></div>
+      <div class="btns"><button data-a="del">${r.del?"복원":"삭제"}</button><button data-a="merge" ${i===rows.length-1?"disabled":""}>다음과 병합</button><button data-a="split">둘로 분할</button></div>
+    </div>`;
+    d.querySelectorAll("[data-k]").forEach(el=>{el.value=r[el.dataset.k]??"";el.oninput=()=>{r[el.dataset.k]=el.value;persist();d.className="row"+(r.del?" del":(r.type&&r.sentiment?" done":""));prog()}});
+    d.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>act(b.dataset.a,i));
+    m.appendChild(d);
+  });prog();
+}
+function act(a,i){
+  if(a==="del")rows[i].del=!rows[i].del;
+  if(a==="merge"){const n=rows[i+1];rows[i].end_ms=n.end_ms;rows[i].transcript+=" "+n.transcript;rows.splice(i+1,1)}
+  if(a==="split"){const r=rows[i],t=r.transcript,h=Math.floor(t.length/2),cut=t.indexOf(". ",h)>0?t.indexOf(". ",h)+1:h,mid=Math.round((r.start_ms+r.end_ms)/2);
+    rows.splice(i+1,0,{...r,start_ms:mid,transcript:t.slice(cut).trim(),type:"",sentiment:"",stance:"",note:""});r.end_ms=mid;r.transcript=t.slice(0,cut).trim()}
+  persist();render();
+}
+function persist(){localStorage.setItem(KEY,JSON.stringify(rows));$("#status").textContent="자동 저장 "+new Date().toLocaleTimeString()}
+function prog(){const live=rows.filter(r=>!r.del),done=live.filter(r=>r.type&&r.sentiment);$("#prog").textContent=`${done.length} / ${live.length}`;$("#dl").disabled=done.length!==live.length||live.length===0}
+function download(name,obj){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(obj,null,1)],{type:"application/json"}));a.download=name;a.click()}
+$("#dl").onclick=()=>{const who=$("#labeler").value.trim()||"unknown";
+  const labels=rows.filter(r=>!r.del).map((r,i)=>({idx:i+1,start_ms:r.start_ms,end_ms:r.end_ms,type:r.type,sentiment:r.sentiment,stance_score:r.stance===""?null:Number(r.stance),issue:r.issue,note:r.note}));
+  download(`golden_${VID}_${who}.json`,{video_id:VID,labeler:who,labeled_at:new Date().toISOString(),labels})};
+$("#save").onclick=()=>download(`label_progress_${VID}.json`,{video_id:VID,labeler:$("#labeler").value,rows});
+$("#load").onclick=()=>$("#file").click();
+$("#file").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{const d=JSON.parse(t);if(d.rows){rows=d.rows;$("#labeler").value=d.labeler||"";persist();render()}})};
+$("#reset").onclick=()=>{if(confirm("모든 라벨을 지우고 처음부터 시작할까요?")){localStorage.removeItem(KEY);rows=SEED.map(s=>({...s,type:"",sentiment:"",stance:"",issue:ISSUE_DEFAULT,note:"",del:false}));render()}};
+$("#labeler").value=localStorage.getItem(KEY+"_who")||"";$("#labeler").oninput=e=>localStorage.setItem(KEY+"_who",e.target.value);
+render();
+</script></body></html>
