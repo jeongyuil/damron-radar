@@ -1,0 +1,18 @@
+pattern,category,action,scope,count_segments,note
+^\[음악\]$,sound_tag,drop_segment,preprocess_3a0,6,세그먼트 전체가 [음악]이면 구간 제거 (3a-0 ①). 세그먼트 단위 적용
+\[(목을 가다듬음|콧방귀|웃음|한숨|환호|박수|헉 소리|기침)\],sound_tag,strip_token,summary_embedding;quote,224,발화 아님. quote_excerpt에서도 제거 — 원문 무수정 원칙의 예외이므로 프롬프트 규칙 반영 시 상호 승인
+^>>\s*,speaker_marker,speaker_break,preprocess_3a0,1400,"자동자막 화자 전환 마커(코퍼스 1,807회). 세그먼트 경계·speaker_label 힌트로 변환 후 제거"
+"(?<![가-힣])(어|음|아|에)(?![가-힣])[,.]?",filler,strip_token,summary_embedding,631,간투사. 요약·임베딩 정규화에만. quote 유지
+(?<![가-힣])(이제|뭐|좀|막|약간|그냥)(?![가-힣]),filler,strip_token,summary_embedding,1188,담화 표지. 요약·임베딩에만. '그·저·자'는 의미어 충돌로 제외
+(?<![가-힣])(그니까|그러니까|근데|그래서|어쨌든)(?![가-힣]),discourse,keep,none,739,논리 연결어 — 제거하지 않음 (claim/opinion 신호 가능)
+"^(네|예|아니요?)[.,!?]?$",backchannel,drop_segment,preprocess_3a0,61,단독 세그먼트 맞장구만. 문장 내 '네.'는 유지
+"^(\[음악\]\s*)?(전국에 계신 애청자 )?(시청자 |여러분,? )?안녕하(십니까|세요)[.?!]?",greeting_open,exclude_extraction,extraction,16,오프닝 인사(코퍼스 28편 중 20편). LLM 규칙 '인사말 미추출'과 중복 — 3a-0 선제 제거 가능
+"(\d{4}년 \d{1,2}월 \d{1,2}일 )?[가-힣A-Z ]{2,20}(시작하겠습니다|심층분석입니다)[.!]?",channel_signature,exclude_extraction,extraction,5,채널 고정 인트로. 채널별 반복 빈도 기반 감지(3a-0 ②)
+압도적 재미 쇼\.,channel_signature,exclude_extraction,extraction,0,매불쇼 인트로
+주말과 휴일 잘 보내고 계십니까\?,channel_signature,exclude_extraction,extraction,1,스픽스 인트로
+"구독과 좋아요,? 댓글 잊지 않으셨죠\?",ad,drop_segment,preprocess_3a0,0,구독 유도 정형구 (배승희 변호사 2회)
+(구독|좋아요|알림\s*설정|채널\s*멤버십|멤버십\s*가입)(을|를| )?(눌러|부탁|잊지),ad,drop_segment,preprocess_3a0,0,구독·알림 유도
+(후원\s*계좌|후원은|카톡방|오픈채팅|open\.kakao|투자자문|무료\s*리딩|선착순 입장),ad,drop_segment,preprocess_3a0,0,후원·광고·리딩방. 여의도튜브 설명란에서 확인(비대상 채널)
+(광고|협찬|PPL)(입니다|였습니다|시간),ad,drop_segment,preprocess_3a0,0,
+(오늘은 여기까지|다음 시간에|시청해 주셔서 감사|고맙습니다\.$),closing,exclude_extraction,extraction,4,아웃트로 정형구
+(?<![가-힣])(사연|사연 코너|청취자 사연)(?![가-힣]),segment_marker,flag_review,extraction,1,사연 코너 — 파일럿 지침 '사연 코너 미추출'. 자동 제거 대신 검수 플래그

@@ -1,0 +1,68 @@
+variant,is_regex,canonical,kind,canonical_in_seed,count,sources,confidence,context_hint,note
+윤성열,N,윤석열,person,Y,48,pilot;snowflake,high,,가장 빈번한 STT 오인식
+윤선열,N,윤석열,person,Y,4,snowflake,high,,
+윤상열,N,윤석열,person,Y,3,snowflake,high,전 대통령,"윤상현과 혼동 주의 — ""전 대통령"" 문맥에서만"
+정청내,N,정청래,person,Y,38,pilot;golden,high,,
+정청례,N,정청래,person,Y,23,pilot,high,,
+정청,N,정청래,person,Y,,pilot;golden,medium,후보|연임|캠프|당대표,"단독 2음절은 문맥 필요 (""정청 후보"")"
+김민서,N,김민석,person,Y,12,pilot,high,후보,
+김인석,N,김민석,person,Y,2,pilot,medium,,
+김성원,N,김승원,person,N,41,snowflake,high,법사위|간사|수원|법무부,"실존 김성원(국힘)과 동명 — ""법사위 간사·수원·판사 출신"" 문맥은 김승원(민주)"
+박준택,N,박균택,person,N,3,snowflake,high,대장동|변호,
+이근태,N,이건태,person,N,1,snowflake,medium,대장동|변호,
+강원식,N,강훈식,person,N,5,snowflake,high,비서실장,
+이흥일,N,이형일,person,N,1,snowflake,low,재정경제부|차관,확인 필요
+송현길,N,송영길,person,Y,,golden,high,,골든셋 #6
+유심민,N,유시민,person,N,3,snowflake,high,작가,유승민(Y)과 별개 인물 — 유시민 시드 추가 필요
+유신민,N,유시민,person,N,1,snowflake,medium,작가,
+유수민,N,유시민,person,N,1,snowflake,medium,작가,
+용회인,N,용혜인,person,Y,5,pilot,high,,
+용예인,N,용혜인,person,Y,6,pilot,high,,
+용해인,N,용혜인,person,Y,1,pilot,high,,
+조위대,N,조희대,person,Y,2,pilot,high,대법원장,
+구현철,N,구윤철,person,Y,2,pilot,high,,
+이재민,N,이재명,person,Y,2,snowflake,high,대통령,"재난 이재민과 구분 — ""대통령"" 문맥"
+이재면,N,이재명,person,Y,1,snowflake,medium,,
+김근희,N,김건희,person,Y,1,snowflake,high,,
+김근혜,N,김건희,person,Y,1,snowflake,medium,,박근혜와 혼동 주의
+김환희,N,김건희,person,Y,1,pilot,medium,,
+정성우,N,정성호,person,Y,3,pilot,medium,장관|법무부,
+오세원,N,오세훈,person,Y,1,snowflake,medium,시장|명태균,
+명태가,N,명태균,person,N,1,snowflake,low,,조사 오인식 가능성 — 문맥 필수
+강진국,N,강진구,person,N,,snowflake,high,기자|뉴탐사,
+김한,N,김완,person,N,7,golden,medium,기자|한겨레,골든셋 영상 출연 기자. 김한길 등 다른 '김한' 접두와 구분 — 기자 문맥 필수
+한결,N,한겨레,org,Y,2,golden,high,기자|신문,
+국민의임,N,국민의힘,party,Y,10,pilot;golden,high,,
+국민의물,N,국민의힘,party,Y,1,pilot,medium,,
+국민의 힘,N,국민의힘,party,Y,,snowflake,high,,띄어쓰기 변형 — 별칭으로도 처리 가능
+더불주당,N,더불어민주당,party,Y,1,pilot,high,,
+직권당,N,집권당,term,N,1,golden,high,,골든셋 #6·#7
+지주율,N,지지율,term,N,7,pilot,high,,
+지질율,N,지지율,term,N,2,pilot,high,,
+최고의원,N,최고위원,term,N,10,golden,high,,
+수속 최고,N,수석 최고,term,N,7,golden,high,최고위원,수석 최고위원
+전당대(?!회),Y,전당대회,term,N,23,pilot;golden,high,,"조사 직결형(""전당대가·전당대에"")만. ""전당대회""는 정상"
+개엄,N,계엄,term,N,8,pilot;snowflake,high,,
+비상개,N,비상계엄,term,N,1,snowflake,medium,,
+보안수사권,N,보완수사권,term,N,2,pilot,high,,
+보안수사건,N,보완수사권,term,N,2,pilot,high,,
+보완수학권,N,보완수사권,term,N,1,pilot,high,,
+보완수 사건,N,보완수사권,term,N,9,pilot,high,,
+충천권,N,충청권,term,N,3,pilot;golden,high,경선|권리당원,골든셋 #5. 공천권 아님
+법사의,N,법사위,org,Y,9,snowflake,high,간사,법사의 간사 형태만
+법사이,N,법사위,org,Y,3,snowflake,medium,,
+공소법,N,공소청법,term,N,3,pilot,medium,중수청,
+공소총,N,공소청,org,N,2,snowflake,medium,중수청,
+세제 편안,N,세제 개편안,term,N,1,golden,high,,
+검찰 계약,N,검찰 개혁,term,N,1,pilot,medium,,
+국회보원회의,N,국회 본회의,term,N,1,pilot,high,,
+사위명,N,사의 표명,term,N,1,pilot,medium,장관,
+인박,N,임박,term,N,1,snowflake,high,,
+국정공단,N,국정농단,term,N,1,snowflake,high,,
+특기 위원장,N,특위 위원장,term,N,1,snowflake,medium,국정조사,
+터기,N,특위,term,N,2,snowflake,medium,국정조사|활동,
+재병문 팩트,N,최병묵의 FACT,channel,N,1,pilot,high,,채널 시그니처
+최배 임팩트,N,최병묵의 FACT,channel,N,1,pilot,high,,채널 시그니처
+신인의 쿠팡TV,N,신인균의 국방TV,channel,N,1,snowflake,high,,채널 시그니처
+유탐사,N,뉴탐사,channel,N,1,snowflake,high,,채널 시그니처
+대직 대표,N,직전 대표,term,N,1,pilot,high,,

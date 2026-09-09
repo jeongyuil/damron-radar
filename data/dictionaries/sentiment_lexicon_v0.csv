@@ -1,0 +1,185 @@
+term,polarity,domain,caution
+심판,negative,정치 일반,
+배신,negative,정치 일반,
+폭탄 발언,negative,정치 일반,
+발칵,negative,정치 일반,
+난리났다,negative,정치 일반,
+충격,negative,정치 일반,
+막장,negative,정치 일반,
+치졸,negative,정치 일반,
+악질,negative,정치 일반,
+해당행위,negative,정치 일반,
+분열,negative,정치 일반,
+갈라치기,negative,정치 일반,
+네거티브,negative,정치 일반,
+흠집내기,negative,정치 일반,
+헛발질,negative,정치 일반,
+발빼기,negative,정치 일반,
+꼼수,negative,정치 일반,
+방탄,negative,정치 일반,
+독재,negative,정치 일반,
+장악,negative,정치 일반,
+폭주,negative,정치 일반,
+독선,negative,정치 일반,
+오만,negative,정치 일반,
+무능,negative,정치 일반,
+무책임,negative,정치 일반,
+한심,negative,정치 일반,
+어이없,negative,정치 일반,
+황당,negative,정치 일반,
+궤변,negative,정치 일반,
+도그마,negative,정치 일반,
+프레임,negative,정치 일반,
+공작,negative,정치 일반,
+조작,negative,정치 일반,
+사꾸라,negative,정치 일반,
+수박,negative,정치 일반,
+적폐,negative,정치 일반,
+카르텔,negative,정치 일반,
+특혜,negative,정치 일반,
+비리,negative,정치 일반,
+부패,negative,정치 일반,
+거짓말,negative,정치 일반,
+허위,negative,정치 일반,
+은폐,negative,정치 일반,
+축소,negative,정치 일반,
+왜곡,negative,정치 일반,
+선동,negative,정치 일반,
+포퓰리즘,negative,정치 일반,
+퍼주기,negative,정치 일반,
+세금 폭탄,negative,정치 일반,
+징벌적,negative,정치 일반,
+규제 폭탄,negative,정치 일반,
+시장 왜곡,negative,정치 일반,
+혈세,negative,정치 일반,
+낭비,negative,정치 일반,
+눈치 보,negative,정치 일반,
+봐주기,negative,정치 일반,
+면죄부,negative,정치 일반,
+무너지,negative,정치 일반,
+위기,negative,정치 일반,
+파탄,negative,정치 일반,
+후폭풍,negative,정치 일반,
+역풍,negative,정치 일반,
+자충수,negative,정치 일반,
+패착,negative,정치 일반,
+실책,negative,정치 일반,
+실패,negative,정치 일반,
+참사,negative,정치 일반,
+망신,negative,정치 일반,
+굴욕,negative,정치 일반,
+비겁,negative,정치 일반,
+용기 상실,negative,정치 일반,
+도망,negative,정치 일반,
+회피,negative,정치 일반,
+발목,negative,정치 일반,
+훼손,negative,정치 일반,
+침해,negative,정치 일반,
+탄압,negative,정치 일반,
+보복,negative,정치 일반,
+야합,negative,정치 일반,
+밀실,negative,정치 일반,
+졸속,negative,정치 일반,
+날치기,negative,정치 일반,
+강행,negative,정치 일반,
+독주,negative,정치 일반,
+일방,negative,정치 일반,
+내란,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+계엄 옹호,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+쿠데타,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+음모론,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+극단,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+극렬,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+강성,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+팬덤,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+맹종,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+맹목,negative,정치 일반,화자가 대상을 규정할 때만 negative. 사실 지칭(내란 재판)은 중립
+성공적,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+잘했,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+훌륭,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+용감,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+결단,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+소신,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+원칙,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+합리적,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+상식적,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+정당한,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+정당방위,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+공정,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+투명,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+책임 있는,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+진정성,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+품격,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+통합,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+화합,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+승복,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+단합,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+원보이스,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+안정,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+개혁,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+쇄신,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+혁신,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+돌파,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+성과,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+약속 지켰,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+공약 이행,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+민생,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+실용,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+유능,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+전문성,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+신뢰,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+존중,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+환영,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+기대,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+희망,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+다행,positive,정치 일반,'개혁·쇄신'은 화자 진영 기준 — 반대 진영이 쓰면 반어 가능
+압도적 승리,positive,선거·여론,
+지지율 상승,positive,선거·여론,
+치고 올라가,positive,선거·여론,
+반등,positive,선거·여론,
+선전,positive,선거·여론,
+약진,positive,선거·여론,
+지지율 하락,negative,선거·여론,
+빠졌,negative,선거·여론,
+추락,negative,선거·여론,
+이탈,negative,선거·여론,
+등 돌려,negative,선거·여론,
+외면,negative,선거·여론,
+심판론,negative,선거·여론,
+발표했다,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+밝혔다,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+말했다,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+보도했다,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+예정,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+계획,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+진행 중,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+검토,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+논의,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+협의,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+제안,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+결정,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+확정,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+통과,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+부결,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+연기,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+출범,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+임명,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+지명,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+사의,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+사퇴,neutral,사실 전달,사실 서술 동사 — sentiment 판단 근거 아님
+잘하고 있다,caution,반어 주의,"비꼬는 맥락(""참 잘하고 있다"") 빈번 — 문맥 필수"
+대단하다,caution,반어 주의,"비꼬는 맥락(""참 잘하고 있다"") 빈번 — 문맥 필수"
+훌륭하시다,caution,반어 주의,"비꼬는 맥락(""참 잘하고 있다"") 빈번 — 문맥 필수"
+고맙다,caution,반어 주의,"비꼬는 맥락(""참 잘하고 있다"") 빈번 — 문맥 필수"
+존경,caution,반어 주의,"비꼬는 맥락(""참 잘하고 있다"") 빈번 — 문맥 필수"
+최고,caution,반어 주의,"비꼬는 맥락(""참 잘하고 있다"") 빈번 — 문맥 필수"
+~라고 한다,caution,인용 주의,타인 감정의 전달 — 화자 감정 아님(speaker_label 기준)
+~라는 비판,caution,인용 주의,타인 감정의 전달 — 화자 감정 아님(speaker_label 기준)
+~라는 지적,caution,인용 주의,타인 감정의 전달 — 화자 감정 아님(speaker_label 기준)
+~라는 평가,caution,인용 주의,타인 감정의 전달 — 화자 감정 아님(speaker_label 기준)
+~라는 얘기,caution,인용 주의,타인 감정의 전달 — 화자 감정 아님(speaker_label 기준)
+아깝다,caution,복합 감정,대상에 대한 부정 평가가 아니라 상황 애석 — neutral 또는 negative 문맥 확인
+안타깝,caution,복합 감정,대상에 대한 부정 평가가 아니라 상황 애석 — neutral 또는 negative 문맥 확인
+마음이 아프,caution,복합 감정,대상에 대한 부정 평가가 아니라 상황 애석 — neutral 또는 negative 문맥 확인
+걱정,caution,복합 감정,대상에 대한 부정 평가가 아니라 상황 애석 — neutral 또는 negative 문맥 확인
+우려,caution,복합 감정,대상에 대한 부정 평가가 아니라 상황 애석 — neutral 또는 negative 문맥 확인
