@@ -10,7 +10,7 @@ PRD는 type/sentiment/stance를 **LLM이 분류**하는 구조(§6.2·§6.3)다.
 | `entities_additions_v0.csv` | (병합 완료 → `data/seeds/entities_seed_v1.csv`, 228건) | 이력용 |
 | `type_decision_book_v0.md` | 검수 기준(§9) · 프롬프트 v2 판례 주입(상호 승인) | §6.2 각주 "판례집 자체가 자산" |
 | `type_signal_lexicon_v0.csv` | 검수 큐 우선순위(사전 신호와 LLM 판정 불일치 건) | LLM 분류 대체 아님 |
-| `stance_polarity_v0.csv` | 프롬프트 `[영상 컨텍스트]` 이슈별 부호 정의 · 검수 기준 | **§8 지표 해석 → 상호 승인** |
+| `stance_polarity_v0.csv` | 프롬프트 `[영상 컨텍스트]` 이슈별 부호 정의 · 검수 기준 | **§8 지표 해석 → 상호 승인**. 원칙 S1: 부호는 발언 **대상**이 아니라 **이슈** 기준(판례집 §2-1) |
 | `sentiment_lexicon_v0.csv` | 검수 큐 우선순위 | 반어·인용 예외 표기 |
 
 버전 규칙은 prompts/와 동일: 기존 버전 파일 수정 금지, 새 버전 생성.

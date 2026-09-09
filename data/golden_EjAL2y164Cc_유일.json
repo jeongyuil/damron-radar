@@ -27,11 +27,11 @@
    "idx": 3,
    "start_ms": 94840,
    "end_ms": 134710,
-   "type": "claim",
+   "type": "opinion",
    "sentiment": "negative",
    "stance_score": 0,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "claim→opinion (R6 예측(금리↑→집값 폭락)) 2026-09-09 유일 합의"
   },
   {
    "idx": 4,
@@ -47,11 +47,11 @@
    "idx": 5,
    "start_ms": 192159,
    "end_ms": 216190,
-   "type": "claim",
+   "type": "opinion",
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": "앞부분은 팩트, 이게 정책입니까? 라는 질문은 의미가 있다기 보다는 부정적인 감정 표현"
+   "note": "앞부분은 팩트, 이게 정책입니까? 라는 질문은 의미가 있다기 보다는 부정적인 감정 표현 | claim→opinion (R6 예측+평가('이게 정책입니까')) 2026-09-09 유일 합의"
   },
   {
    "idx": 6,
@@ -67,11 +67,11 @@
    "idx": 7,
    "start_ms": 253079,
    "end_ms": 280110,
-   "type": "claim",
+   "type": "opinion",
    "sentiment": "negative",
    "stance_score": -1,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "claim→opinion (R6 예측(주가·부동산 폭락)) 2026-09-09 유일 합의"
   },
   {
    "idx": 8,
@@ -117,11 +117,11 @@
    "idx": 12,
    "start_ms": 386280,
    "end_ms": 420710,
-   "type": "claim",
+   "type": "opinion",
    "sentiment": "negative",
    "stance_score": 0,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "claim→opinion (R6 예측('폭락 안 할 것')) 2026-09-09 유일 합의"
   },
   {
    "idx": 13,
@@ -217,11 +217,11 @@
    "idx": 22,
    "start_ms": 785720,
    "end_ms": 877590,
-   "type": "claim",
+   "type": "opinion",
    "sentiment": "negative",
    "stance_score": -2,
    "issue": "real-estate-policy",
-   "note": ""
+   "note": "claim→opinion (R7 당위('완만히 상승해야')) 2026-09-09 유일 합의"
   },
   {
    "idx": 23,

@@ -9,9 +9,9 @@
    "end_ms": 66145,
    "type": "fact",
    "sentiment": "negative",
-   "stance_score": -2,
+   "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 2,
@@ -19,9 +19,9 @@
    "end_ms": 96789,
    "type": "fact",
    "sentiment": "negative",
-   "stance_score": -2,
+   "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 3,
@@ -29,9 +29,9 @@
    "end_ms": 141550,
    "type": "claim",
    "sentiment": "negative",
-   "stance_score": -2,
+   "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 4,
@@ -39,9 +39,9 @@
    "end_ms": 205007,
    "type": "claim",
    "sentiment": "negative",
-   "stance_score": -2,
+   "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 5,
@@ -49,9 +49,9 @@
    "end_ms": 245149,
    "type": "fact",
    "sentiment": "negative",
-   "stance_score": -2,
+   "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 6,
@@ -59,9 +59,9 @@
    "end_ms": 292070,
    "type": "opinion",
    "sentiment": "negative",
-   "stance_score": -1,
+   "stance_score": 1,
    "issue": "election-fraud-allegation",
-   "note": "주장과 의견이 섞여있음"
+   "note": "주장과 의견이 섞여있음 | stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 7,
@@ -69,9 +69,9 @@
    "end_ms": 345909,
    "type": "claim",
    "sentiment": "negative",
-   "stance_score": -2,
+   "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 8,
@@ -89,9 +89,9 @@
    "end_ms": 407830,
    "type": "claim",
    "sentiment": "negative",
-   "stance_score": -1,
+   "stance_score": 1,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 10,
@@ -99,9 +99,9 @@
    "end_ms": 434075,
    "type": "claim",
    "sentiment": "negative",
-   "stance_score": -2,
+   "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   },
   {
    "idx": 11,
@@ -119,9 +119,9 @@
    "end_ms": 483560,
    "type": "opinion",
    "sentiment": "negative",
-   "stance_score": -2,
+   "stance_score": 2,
    "issue": "election-fraud-allegation",
-   "note": ""
+   "note": "stance 부호 반전: 대상(윤상현) 기준→이슈(의혹 규명) 기준 2026-09-09"
   }
  ]
 }
