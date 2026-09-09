@@ -5,8 +5,9 @@
     → transcripts/golden/label_template_<vid>.json  (구간 + 전사 + 빈 type/sentiment/stance)
       transcripts/golden/label_template_<vid>.md    (읽으면서 채우는 워크시트)
 
-라벨링 후: transcript 필드를 뺀 파일을 data/golden_<vid>_<라벨러>.json 으로 저장
-    uv run python scripts/golden_template.py --finalize transcripts/golden/label_template_<vid>.json 유일
+라벨링은 .csv(스프레드시트) · .md(표) · .json 중 편한 걸로. 끝나면:
+    uv run python scripts/golden_template.py --finalize transcripts/golden/label_template_<vid>.csv 유일
+    (.md/.json도 동일. 값 검증 후 data/golden_<vid>_<라벨러>.json 생성 — transcript 제외)
 
 구간 규칙: 자막 이벤트를 문장 종결(다./요./죠./까?)에서 끊어 20~90초 묶음. 라벨러가 병합·분할·삭제 자유.
 기준: PRD §6.2 결정 트리 (①참/거짓 판별 원리상 가능? 아니오→opinion ②근거 제시? 예→fact 아니오→claim)
@@ -148,6 +149,42 @@ def build(video_id: str) -> None:
             f"| {i + 1} | [{s // 60}:{s % 60:02d}](https://youtube.com/watch?v={video_id}&t={s}s) | {sp['transcript']} |  |  |  |  |"
         )
     (GOLDEN_DIR / f"label_template_{video_id}.md").write_text("\n".join(md), encoding="utf-8")
+    import csv
+
+    with (GOLDEN_DIR / f"label_template_{video_id}.csv").open(
+        "w", encoding="utf-8-sig", newline=""
+    ) as f:
+        w = csv.writer(f)
+        w.writerow(
+            [
+                "idx",
+                "start_ms",
+                "end_ms",
+                "시작",
+                "type",
+                "sentiment",
+                "stance_score",
+                "issue",
+                "note",
+                "transcript",
+            ]
+        )
+        for i, sp in enumerate(spans):
+            st = sp["start_ms"] // 1000
+            w.writerow(
+                [
+                    i + 1,
+                    sp["start_ms"],
+                    sp["end_ms"],
+                    f"{st // 60}:{st % 60:02d}",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    sp["transcript"],
+                ]
+            )
     durs = [(sp["end_ms"] - sp["start_ms"]) / 1000 for sp in spans]
     print(
         f"{video_id}: {meta.get('channel', '')} · {meta.get('title', '')[:40]} · {meta.get('duration_s', '?')}s → 구간 {len(spans)}개 "
@@ -155,25 +192,111 @@ def build(video_id: str) -> None:
     )
 
 
+def _labels_from_csv(path: Path) -> tuple[str, list[dict]]:
+    import csv
+
+    vid = path.stem.replace("label_template_", "")
+    labels = []
+    for r in csv.DictReader(path.open(encoding="utf-8-sig")):
+        labels.append(
+            {
+                "idx": int(r["idx"]),
+                "start_ms": int(r["start_ms"]),
+                "end_ms": int(r["end_ms"]),
+                "type": r.get("type", "").strip(),
+                "sentiment": r.get("sentiment", "").strip(),
+                "stance_score": r.get("stance_score", "").strip(),
+                "issue": r.get("issue", "").strip(),
+                "note": r.get("note", "").strip(),
+            }
+        )
+    return vid, labels
+
+
+def _labels_from_md(path: Path) -> tuple[str, list[dict]]:
+    """워크시트 .md 표에서 읽기 — start/end ms는 같은 이름의 .json 템플릿에서 가져온다."""
+    vid = path.stem.replace("label_template_", "")
+    tpl = json.loads((path.parent / f"label_template_{vid}.json").read_text(encoding="utf-8"))
+    by_idx = {lab["idx"]: lab for lab in tpl["labels"]}
+    labels = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"\|\s*(\d+)\s*\|", line)
+        if not m:
+            continue
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        # | # | 시작 | 전사 | type | sent | stance | issue/메모 |
+        if len(cells) < 7:
+            continue
+        idx = int(cells[0])
+        src = by_idx.get(idx)
+        if not src:
+            continue
+        issue_note = cells[6]
+        issue, _, note = issue_note.partition("/")
+        labels.append(
+            {
+                "idx": idx,
+                "start_ms": src["start_ms"],
+                "end_ms": src["end_ms"],
+                "type": cells[3],
+                "sentiment": cells[4],
+                "stance_score": cells[5],
+                "issue": issue.strip(),
+                "note": note.strip(),
+            }
+        )
+    return vid, labels
+
+
 def finalize(path: Path, labeler: str) -> None:
-    d = json.loads(path.read_text(encoding="utf-8"))
-    labels = [
-        {k: v for k, v in lab.items() if k != "transcript"}
-        for lab in d["labels"]
-        if lab.get("type")
-    ]
-    for i, lab in enumerate(labels):
+    """채운 템플릿(.json / .csv / .md) → data/golden_<vid>_<labeler>.json (transcript 제외, type 빈 구간 제외)."""
+    if path.suffix == ".csv":
+        vid, labels = _labels_from_csv(path)
+    elif path.suffix == ".md":
+        vid, labels = _labels_from_md(path)
+    else:
+        d = json.loads(path.read_text(encoding="utf-8"))
+        vid, labels = d["video_id"], d["labels"]
+    out_labels, bad = [], []
+    for lab in labels:
+        t = str(lab.get("type", "")).strip().lower()
+        if not t:
+            continue
+        sent = str(lab.get("sentiment", "")).strip().lower()
+        st = lab.get("stance_score")
+        st = None if st in (None, "", "null", "None") else int(float(st))
+        if (
+            t not in ("fact", "claim", "opinion")
+            or sent not in ("positive", "negative", "neutral")
+            or (st is not None and not -2 <= st <= 2)
+        ):
+            bad.append(f"#{lab['idx']} type={t} sentiment={sent} stance={st}")
+        out_labels.append(
+            {
+                "idx": 0,
+                "start_ms": lab["start_ms"],
+                "end_ms": lab["end_ms"],
+                "type": t,
+                "sentiment": sent,
+                "stance_score": st,
+                "issue": lab.get("issue", ""),
+                "note": lab.get("note", ""),
+            }
+        )
+    if bad:
+        sys.exit("값 오류 — 고치고 다시 실행:\n  " + "\n  ".join(bad))
+    for i, lab in enumerate(out_labels):
         lab["idx"] = i + 1
     out = {
-        "video_id": d["video_id"],
+        "video_id": vid,
         "labeler": labeler,
         "labeled_at": datetime.now(UTC).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
-        "labels": labels,
+        "labels": out_labels,
     }
-    op = ROOT / "data" / f"golden_{d['video_id']}_{labeler}.json"
+    op = ROOT / "data" / f"golden_{vid}_{labeler}.json"
     op.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     print(
-        f"{op.relative_to(ROOT)}: {len(labels)}건 (type 비어 있는 구간 {len(d['labels']) - len(labels)}개 제외)"
+        f"{op.relative_to(ROOT)}: {len(out_labels)}건 (type 비어 있는 구간 {len(labels) - len(out_labels)}개 제외)"
     )
 
 
