@@ -19,5 +19,5 @@ PRD는 type/sentiment/stance를 **LLM이 분류**하는 구조(§6.2·§6.3)다.
 ## 검증 (골든셋 wBbMtXMTU8w 13건, Qwen3.5-9B thinking off, 2026-09-09)
 
 `scripts/golden_bench.py --with-dict` 로 판례집 규칙(R1~R14)과 이슈 부호 규칙을 프롬프트에 주입한 전/후 비교.
-결과는 `reports/golden_bench_wBbMtXMTU8w.md` 표의 `qwen3.5-9b-8bit` vs `qwen3.5-9b-8bit+dict` 행.
+결과는 `reports/golden_bench_wBbMtXMTU8w_성환.md` 표의 `qwen3.5-9b-8bit` vs `qwen3.5-9b-8bit+dict` 행.
 어휘 사전(D·E2)은 프롬프트에 넣지 않는다 — 검수 큐 우선순위용(신호만으로 골든셋 8/13, 분류기 아님).

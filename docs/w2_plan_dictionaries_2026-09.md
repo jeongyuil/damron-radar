@@ -40,7 +40,7 @@ PRD는 사실/주장/의견·감성·입장을 **LLM이 분류**하는 구조(§
 ## 3. 검증 방법 (DoD)
 
 - 사전 5종이 `data/dictionaries/`에 버전 파일로 존재하고 README에 각 사전의 "누가 소비하는가"(프롬프트/검수/전처리)가 적혀 있다.
-- 골든셋 재채점 결과가 `reports/golden_bench_wBbMtXMTU8w.md`에 "사전 주입 전/후" 두 행으로 남는다.
+- 골든셋 재채점 결과가 `reports/golden_bench_wBbMtXMTU8w_성환.md`에 "사전 주입 전/후" 두 행으로 남는다.
 - stance 부호 규칙 31건에 성환 승인 기록(decision_log 한 줄).
 
 ## 4. 의존·리스크

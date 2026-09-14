@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-14T16:59:12+09:00",
- "golden": "transcripts/golden/golden_MD-vsT5q_5U_성환.jsonl",
+ "generated": "2026-09-14T16:54:55+09:00",
+ "golden": "transcripts/golden/golden_MD-vsT5q_5U.jsonl",
  "prompt_sha": "0cbf055bc2a0",
  "models": {
   "qwen3.5-9b-8bit+dict": {
@@ -8,25 +8,26 @@
    "provider": "openai",
    "note": "현 임시 모델 · thinking off · 사전 주입",
    "score": {
-    "n": 11,
+    "n": 12,
     "errors": 0,
-    "type_acc": 0.7272727272727273,
-    "type_f1_3": 0.407843137254902,
-    "type_f1_2": 0.611764705882353,
+    "type_acc": 0.4166666666666667,
+    "type_f1_3": 0.2888888888888889,
+    "type_f1_2": 0.2888888888888889,
     "type_classes_2": [
+     "fact",
      "claim",
      "opinion"
     ],
-    "sent_acc": 1.0,
-    "sent_f1": 0.3333333333333333,
-    "stance_mae": 0.36363636363636365,
-    "stance_n_both": 11,
+    "sent_acc": 0.9166666666666666,
+    "sent_f1": 0.31884057971014496,
+    "stance_mae": 0.5,
+    "stance_n_both": 12,
     "stance_null_match": 1.0,
-    "stance_dir_match": 1.0,
-    "stance_exact": 0.6363636363636364,
-    "latency_avg": 6.909090909090909,
-    "latency_total": 76.0,
-    "tokens_out_avg": 81.63636363636364
+    "stance_dir_match": 0.9166666666666666,
+    "stance_exact": 0.5833333333333334,
+    "latency_avg": 10.333333333333334,
+    "latency_total": 124.0,
+    "tokens_out_avg": 78.58333333333333
    },
    "preds": [
     {
@@ -38,7 +39,7 @@
       "reason": "검증 가능한 명제이나 근거가 없는 전언('국민의 힘이 부정 선거론의 나락에 빠져들었다' 등)을 제시하여 claim으로 분류되며, 부정선거 의혹 규명 이슈에 대해 강하게 반대하는 태도를 보입니다."
      },
      "error": null,
-     "latency_s": 7.9,
+     "latency_s": 54.1,
      "usage": {
       "in": 1741,
       "out": 78
@@ -83,7 +84,7 @@
       "reason": "검증 가능한 명제(특검 주도 재검표로 인해 공개 재검표 무산)를 제시했으나 근거가 불충분하며, 화자가 윤상현의 행위를 '부정선거론에 나락에 빠졌다'고 평가하는 부정적 감정과 강경한 반대 입장을 드러냄"
      },
      "error": null,
-     "latency_s": 7.7,
+     "latency_s": 7.4,
      "usage": {
       "in": 1750,
       "out": 91
@@ -98,7 +99,7 @@
       "reason": "검증 가능한 명제(윤상현 위원장이 부정선거론을 선을 그었다는 전언)이나 근거가 불충분하며, 화자가 이를 부정선거 의혹 규명 필요성에 반하는 행위로 평가하고 있다. [json-repair]"
      },
      "error": null,
-     "latency_s": 6.3,
+     "latency_s": 6.0,
      "usage": {
       "in": 1653,
       "out": 74
@@ -113,7 +114,7 @@
       "reason": "검증 가능한 명제이나 근거가 없는 전언('이렇게 말했습니다')을 사용하여 특정 주체의 행위를 비판하고 있다."
      },
      "error": null,
-     "latency_s": 4.6,
+     "latency_s": 4.5,
      "usage": {
       "in": 1671,
       "out": 53
@@ -128,7 +129,7 @@
       "reason": "검증 가능한 명제이나 근거가 없는 전언('비판했다고 합니다', '이렇게 말했습니다')으로 구성되었으며, 부정선거 의혹 규명 이슈에 대해 윤상현 및 국민의힘을 강력히 비판하는 태도를 보입니다."
      },
      "error": null,
-     "latency_s": 6.3,
+     "latency_s": 6.1,
      "usage": {
       "in": 1695,
       "out": 75
@@ -143,7 +144,7 @@
       "reason": "검정·포렌식 실시 필요성을 주장하는 야당 측의 명제를 검증 가능한 근거 없이 전언으로 전달한 후, 이를 부정선거 업무론자·유튜브 세력·정치 카르텔로 규정하며 비판하는 것이 화자의 중심 명제이므로 검증 불가한 평가 (opinion) 에 해당하며, 부정선거 의혹 규명 이슈에 대해 강력한 반대 (-2) 의 입장을 취함."
      },
      "error": null,
-     "latency_s": 9.1,
+     "latency_s": 8.8,
      "usage": {
       "in": 1607,
       "out": 114
@@ -158,7 +159,7 @@
       "reason": "검증 가능한 명제이나 근거가 없는 '귀책'과 '몰아세우고 있다'는 화자의 해석적 평가로 인해 claim으로 분류되며, 부정선거 규명 이슈에 대해 국힘의 대응을 비판하는 negative 감정과 반대 입장을 보입니다."
      },
      "error": null,
-     "latency_s": 6.6,
+     "latency_s": 6.5,
      "usage": {
       "in": 1640,
       "out": 81
@@ -167,20 +168,35 @@
     {
      "idx": 10,
      "pred": {
-      "type": "claim",
+      "type": "opinion",
       "sentiment": "negative",
       "stance_score": -2,
-      "reason": "검증 가능한 명제(윤상현의 태도 문제, 대통령의 비상계엄 목적 등)를 제시했으나 구체적인 근거(출처·일시·문서 등)가 부재하여 claim으로 분류되며, 부정선거 규명 실패와 윤상현의 비리/배신을 강력히 비판하는 negative 감정과 -2 의 반대 입장을 가짐"
+      "reason": "화자가 윤상현의 리더십과 태도를 '바가지로 들어먹는' 행위라고 평가하며, 이는 검증 불가능한 가치 판단과 해석에 해당하므로 opinion 유형이며, 부정선거 규명 이슈에 대해 강한 반대(-2) 입장을 취함."
      },
      "error": null,
-     "latency_s": 8.5,
+     "latency_s": 6.5,
      "usage": {
-      "in": 1721,
-      "out": 103
+      "in": 1616,
+      "out": 82
      }
     },
     {
      "idx": 11,
+     "pred": {
+      "type": "claim",
+      "sentiment": "negative",
+      "stance_score": 1,
+      "reason": "검증 가능한 명제(비상계동 목적 및 서버 확보 실패 등)를 제시했으나 구체적인 수치·출처·일시 등 근거가 부재하여 claim으로 분류됨"
+     },
+     "error": null,
+     "latency_s": 5.4,
+     "usage": {
+      "in": 1624,
+      "out": 66
+     }
+    },
+    {
+     "idx": 12,
      "pred": {
       "type": "opinion",
       "sentiment": "negative",
@@ -188,7 +204,7 @@
       "reason": "화자가 윤상현의 발언을 '배신'과 '기회주의적 태도'로 규정하며 비판하는 것은 검증 불가능한 가치 판단과 해석에 해당하므로 opinion 유형이며, 부정선거 규명 이슈에 대해 강한 반대(-2) 입장을 취함."
      },
      "error": null,
-     "latency_s": 7.0,
+     "latency_s": 6.7,
      "usage": {
       "in": 1589,
       "out": 84

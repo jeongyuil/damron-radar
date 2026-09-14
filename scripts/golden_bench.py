@@ -21,7 +21,7 @@
     sentiment accuracy · macro-F1
     stance    MAE(정답·예측 모두 non-null) · null 일치율 · 방향(부호) 일치율(PRD §1 "입장 방향 정확도")
 
-출력: reports/golden_bench_<video_id>.md (비교 표 + 오답 덤프) + reports/golden_bench_<video_id>_preds.json
+출력: reports/golden_bench_<video_id>_<labeler>.md (비교 표 + 오답 덤프) + 같은 이름 _preds.json
 """
 
 from __future__ import annotations
@@ -315,7 +315,7 @@ def caption_text(events: list[dict], start_ms: int, end_ms: int) -> str:
 def materialize(golden_json: Path, issues: list[str]) -> Path:
     g = json.loads(golden_json.read_text(encoding="utf-8"))
     vid = g["video_id"]
-    out = GOLDEN_DIR / f"golden_{vid}.jsonl"
+    out = GOLDEN_DIR / f"golden_{vid}_{g.get('labeler', 'unknown')}.jsonl"
     cap = ensure_captions(vid)
     events = json.loads(cap.read_text(encoding="utf-8"))["events"]
     meta = video_meta(vid)
@@ -738,9 +738,14 @@ def main() -> None:
         jsonl = Path(args.jsonl)
     else:
         golden = Path(args.golden)
-        vid = json.loads(golden.read_text(encoding="utf-8"))["video_id"]
-        jsonl = GOLDEN_DIR / f"golden_{vid}.jsonl"
-        if args.rematerialize or not jsonl.exists():
+        gj = json.loads(golden.read_text(encoding="utf-8"))
+        vid = gj["video_id"]
+        jsonl = GOLDEN_DIR / f"golden_{vid}_{gj.get('labeler', 'unknown')}.jsonl"
+        if (
+            args.rematerialize
+            or not jsonl.exists()
+            or golden.stat().st_mtime > jsonl.stat().st_mtime
+        ):
             print("[1/3] 골든셋 결합")
             materialize(golden, [s.strip() for s in args.issues.split(",") if s.strip()])
     items = [json.loads(l) for l in jsonl.read_text(encoding="utf-8").splitlines() if l.strip()]
@@ -778,9 +783,10 @@ def main() -> None:
 
     print("[3/3] 리포트")
     vid = items[0]["video_id"]
+    tag = f"{vid}_{items[0].get('labeler') or 'unknown'}"
     REPORT_DIR.mkdir(exist_ok=True)
-    md = REPORT_DIR / f"golden_bench_{vid}.md"
-    raw = REPORT_DIR / f"golden_bench_{vid}_preds.json"
+    md = REPORT_DIR / f"golden_bench_{tag}.md"
+    raw = REPORT_DIR / f"golden_bench_{tag}_preds.json"
     # 이전 실행 결과 병합 — 후보를 따로따로 돌려도 표 한 장에 모인다 (같은 골든셋·같은 프롬프트일 때만)
     if raw.exists() and not args.no_merge:
         prev = json.loads(raw.read_text(encoding="utf-8"))

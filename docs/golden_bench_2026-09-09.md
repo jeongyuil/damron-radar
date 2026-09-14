@@ -1,6 +1,6 @@
 # 골든셋 선발전 1차 — 개발 결과 공유 (2026-09-09)
 
-작성: 유일 · 대상: 성환 · 관련 파일: `scripts/golden_bench.py`, `reports/golden_bench_wBbMtXMTU8w.md`
+작성: 유일 · 대상: 성환 · 관련 파일: `scripts/golden_bench.py`, `reports/golden_bench_wBbMtXMTU8w_성환.md`
 
 ## 1. 목적
 
@@ -18,7 +18,7 @@ PRD §1 게이트: **발언 유형 일치율 85%+, 입장 방향 일치율 90%+*
 | 프롬프트 | PRD §6.2 결정 트리를 시스템 프롬프트로 고정: ① 제3자가 참/거짓 판별 원리상 가능? 아니오→opinion ② 근거(수치·출처·일시) 제시? 예→fact, 아니오→claim. §6.2 정의 표·예시 포함. 발언 1건씩, temperature 0, 출력은 `{type, sentiment, stance_score, reason}` JSON |
 | 후보 모델 | 레지스트리(`CANDIDATES`)에 등록. OpenAI 호환 로컬 서버(mlx_lm.server 등)와 Anthropic API 지원. 실행 불가 후보(키 없음·서버 없음)는 자동 스킵하고 표에 사유 표기. 새 후보는 레지스트리 추가 또는 `--add name=<base_url>\|<model>` |
 | 채점 | type: accuracy · macro-F1 3클래스(fact/claim/opinion) · macro-F1 2클래스(fact/opinion — 골든셋에 claim 표본이 0건이라 병기, claim 예측은 양쪽 모두 오답) / sentiment: accuracy · macro-F1 / stance: MAE(정답·예측 모두 non-null) · null 일치율 · 방향(부호) 일치율 |
-| 출력 | `reports/golden_bench_<vid>.md`(비교 표 + 혼동 행렬 + 오답 덤프) · `reports/golden_bench_<vid>_preds.json`(원시 예측·지연·토큰·프롬프트 해시). 후보를 따로 돌려도 같은 골든셋·같은 프롬프트면 한 표에 병합 |
+| 출력 | `reports/golden_bench_<vid>_<labeler>.md`(비교 표 + 혼동 행렬 + 오답 덤프) · `reports/golden_bench_<vid>_preds.json`(원시 예측·지연·토큰·프롬프트 해시). 후보를 따로 돌려도 같은 골든셋·같은 프롬프트면 한 표에 병합 |
 
 오답 덤프에는 건별 타임스탬프 링크, 전사 200자(§7.3 하드리밋 준수), 모델이 밝힌 판단 근거, 라벨러 메모가 붙는다.
 
